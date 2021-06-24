@@ -145,10 +145,13 @@ if(isset($_POST['submit'])){
             $query=mysqli_query($con,"insert into bookings(name, timeslot, email, date,Services, beautician, PhoneNumber) value('$name', '$timeslot', '$email', '$date','$services',' $beauty','$number')");
                            
             }
+            
             $ret=mysqli_query($con,"select id from bookings where email='$email' and  PhoneNumber='$phone'");
             $result=mysqli_fetch_array($ret);
             $_SESSION['aptno']=$result['id'];
-            echo "<script>window.location.href='thank-you.php'</script>";
+            //echo "<script>window.location.href='thank-you.php'</script>";
+            $_SESSION['booking-success']=1;
+            header("location: userindex.php");
             $stmt->execute();
             $msg = "<div class='alert alert-success'>Booking Successfull</div>";
             $bookings[] = $timeslot;
