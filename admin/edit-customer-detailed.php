@@ -72,8 +72,13 @@ $details=$_POST['details'];
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="forms">
+			
+				<div class="forms"> 
 					<h3 class="title1">Update Customer</h3>
+
+					<br>
+			 	<a href="customer-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
+			
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">
 							<h4>Customer Details:</h4>
@@ -92,11 +97,12 @@ while ($row=mysqli_fetch_array($ret)) {
 ?> 
 
   
-							 <div class="form-group"> <label for="exampleInputEmail1">Name</label> <input type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['Name'];?>" required="true"> </div> <div class="form-group"> <label for="exampleInputPassword1">Email</label> <input type="text" id="email" name="email" class="form-control"  value="<?php  echo $row['Email'];?>" required="true"> </div>
-							 <div class="form-group"> <label for="exampleInputPassword1">Mobile Number</label> <input type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['MobileNumber'];?>" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputEmail1">Name</label> <input type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['Name'];?>" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputPassword1">Email</label> <input type="text" id="email" name="email" class="form-control"  value="<?php  echo $row['email'];?>" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputPassword1">Mobile Number</label> <input type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['contactno'];?>" required="true"> </div>
 							 
                    <div class="form-group"> <label for="exampleInputEmail1">Details</label> <textarea type="text" class="form-control" id="details" name="details" placeholder="Details" required="true" rows="12" cols="4"><?php  echo $row['Details'];?></textarea> </div>
-                   <div class="form-group"> <label for="exampleInputPassword1">Creation Date</label> <input type="text" id="" name="" class="form-control"  value="<?php  echo $row['CreationDate'];?>" readonly='true'> </div>
+                   
 
 							 <?php } ?>
 							  <button type="submit" name="submit" class="btn btn-default">Update</button> </form> 
@@ -107,7 +113,7 @@ while ($row=mysqli_fetch_array($ret)) {
 				
 			</div>
 		</div>
-		 <?php include_once('includes/footer.php');?>
+		
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>

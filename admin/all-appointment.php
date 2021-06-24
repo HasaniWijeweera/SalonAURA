@@ -64,7 +64,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<!-- <th> Appointment Number</th> -->
 						 <th>Name</th><th>Mobile Number</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  bookings");
+$ret=mysqli_query($con,"select *from  bookings group by ApplyDate");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 

@@ -84,7 +84,8 @@ $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
-							 <div class="form-group"> <label for="exampleInputEmail1">Admin Name</label> <input type="text" class="form-control" id="adminname" name="adminname" placeholder="Admin Name" value="<?php  echo $row['AdminName'];?>"> </div> <div class="form-group"> <label for="exampleInputPassword1">User Name</label> <input type="text" id="username" name="username" class="form-control" value="<?php  echo $row['UserName'];?>" readonly="true"> </div>
+							 <div class="form-group"> <label for="exampleInputEmail1">Admin Name</label> <input type="text" class="form-control" id="adminname" name="adminname" placeholder="Admin Name" value="<?php  echo $row['AdminName'];?>"> </div> 
+							 <div class="form-group"> <label for="exampleInputPassword1">User Name</label> <input type="text" id="username" name="username" class="form-control" value="<?php  echo $row['UserName'];?>" readonly="true"> </div>
 							 <div class="form-group"> <label for="exampleInputPassword1">Contact Number</label> <input type="text" id="contactnumber" name="contactnumber" class="form-control" value="<?php  echo $row['MobileNumber'];?>"> </div>
 							 <div class="form-group"> <label for="exampleInputPassword1">Email address</label> <input type="email" id="email" name="email" class="form-control" value="<?php  echo $row['Email'];?>" readonly='true'> </div>  
 							  <button type="submit" name="submit" class="btn btn-default">Update</button> </form> 

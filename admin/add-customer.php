@@ -70,9 +70,14 @@ echo "<script>alert('Something Went Wrong. Please try again.');</script>";
 			<div class="main-page">
 				<div class="forms">
 					<h3 class="title1">Add Customer</h3>
+					<br>
+					<a href="customer-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+					
 						<div class="form-title">
+						
 							<h4> Customer:</h4>
+							
 						</div>
 						<div class="form-body">
 							<form method="post">

@@ -8,6 +8,14 @@ include('includes/dbconnection.php');
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+if(isset($_SESSION['booking-success'])){
+    if($_SESSION['booking-success']==1){
+        echo '<script>alert("Booking success.")</script>';
+
+    }
+    $_SESSION['booking-success']=0;
+
+}
 if(isset($_POST['submit']))
   {
 
