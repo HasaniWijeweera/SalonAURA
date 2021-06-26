@@ -9,16 +9,15 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 if(isset($_POST['submit']))
   {
    $name=$_POST['name'];
-    $email=$_POST['email'];
+   $email=$_POST['email'];
    $mobilenum=$_POST['mobilenum'];
-    $gender=$_POST['gender'];
-$details=$_POST['details'];
-   
- $eid=$_GET['editid'];
+   $product=['product'];
+
+   $eid=$_GET['editid'];
      
-    $query=mysqli_query($con, "update  users set Name='$name',Email='$email',MobileNumber='$mobilenum',Gender='$gender',Details='$details' where ID='$eid' ");
+    $query=mysqli_query($con, "suppliers set name='$name', product='$product',email='$email',contactno='$mobilenum' where id='$eid' ");
     if ($query) {
-    $msg="Customer Detail has been Updated.";
+    $msg="Supplier Details has been Updated.";
   }
   else
     {
@@ -31,7 +30,7 @@ $details=$_POST['details'];
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>BPMS | Update Services</title>
+<title>Salon AURA | Update Suppliers</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -72,11 +71,16 @@ $details=$_POST['details'];
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="forms">
-					<h3 class="title1">Update Services</h3>
+			
+				<div class="forms"> 
+					<h3 class="title1">Update Supplier</h3>
+
+					<br>
+			 	<a href="employee-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
+			
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">
-							<h4>Update Parlour Services:</h4>
+							<h4>Supplier Details:</h4>
 						</div>
 						<div class="form-body">
 							<form method="post">
@@ -85,35 +89,20 @@ $details=$_POST['details'];
   }  ?> </p>
   <?php
  $cid=$_GET['editid'];
-$ret=mysqli_query($con,"select * from  suppliers where ID='$cid'");
+$ret=mysqli_query($con,"select * from  suppliers where id='$cid'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?> 
-
+ 
   
-							 <div class="form-group"> <label for="exampleInputEmail1">Name</label> <input type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['Name'];?>" required="true"> </div> <div class="form-group"> <label for="exampleInputPassword1">Email</label> <input type="text" id="email" name="email" class="form-control"  value="<?php  echo $row['Email'];?>" required="true"> </div>
-							 <div class="form-group"> <label for="exampleInputPassword1">Mobile Number</label> <input type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['MobileNumber'];?>" required="true"> </div>
-							 <div class="form-group"> <label for="exampleInputPassword1">Gender</label> <?php if($row['Gender']=="Male")
-{?><input type="radio" id="gender" name="gender" value="Male" checked="true">Male
-
-                     <input type="radio" name="gender" value="Female">Female
-                     <input type="radio" name="gender" value="Transgender">Transgender
-                   <?php } ?>
-<?php if($row['Gender']=="Female")
-{?><input type="radio" id="gender" name="gender" value="Male" >Male
-
-                     <input type="radio" name="gender" value="Female" checked="true">Female
-                     <input type="radio" name="gender" value="Transgender">Transgender
-                   <?php } 
-
-                    else {?>
- <input type="radio" id="gender" name="gender" value="Male" >Male
-  <input type="radio" name="gender" value="Female" >Female
-  <input type="radio" name="gender" value="Transgender" checked="true">Transgender
-                   <?php }?>
-                   <div class="form-group"> <label for="exampleInputEmail1">Details</label> <textarea type="text" class="form-control" id="details" name="details" placeholder="Details" required="true" rows="12" cols="4"><?php  echo $row['Details'];?></textarea> </div>
-                   <div class="form-group"> <label for="exampleInputPassword1">Creation Date</label> <input type="text" id="" name="" class="form-control"  value="<?php  echo $row['CreationDate'];?>" readonly='true'> </div>
+							 <div class="form-group"> <label >Name</label> <input type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['name'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Product Details</label> <input type="text" id="product" name="product" class="form-control"  value="<?php  echo $row['product'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Email</label> <input type="text" id="email" name="email" class="form-control"  value="<?php  echo $row['email'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Mobile Number</label> <input type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['contactno'];?>" required="true"> </div>
+							
+                  
+                   
 
 							 <?php } ?>
 							  <button type="submit" name="submit" class="btn btn-default">Update</button> </form> 
@@ -124,7 +113,7 @@ while ($row=mysqli_fetch_array($ret)) {
 				
 			</div>
 		</div>
-		 <?php include_once('includes/footer.php');?>
+		
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>

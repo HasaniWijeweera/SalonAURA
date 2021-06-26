@@ -6,13 +6,25 @@ if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
 
-
-
+if(isset($_POST['submit']))
+  {
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+   $mobilenum=$_POST['mobilenum'];
+ 
+     
+    $query=mysqli_query($con, "insert into  tblemployees (Name,email,contactno) value('$name','$email','$mobilenum')");
+    if ($query) {
+echo "<script>alert('Employee has been added.');</script>"; 
+echo "<script>window.location.href = 'employee-list.php'</script>"; 
+ } else {
+echo "<script>alert('Something Went Wrong. Please try again.');</script>";  	
+} }
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || Supplier List</title>
+<title>Salon AURA | Add employee</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -48,40 +60,48 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 <?php include_once('includes/sidebar.php');?>
 		<!--left-fixed -navigation-->
 		<!-- header-starts -->
-		 <?php include_once('includes/header.php');?>
+	 <?php include_once('includes/header.php');?>
 		<!-- //header-ends -->
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">Supplier List</h3>
-					<br>
-					<a href="add-supplier.php"><input type="submit" name="submit" value="Add supplier" class="btn btn-primary" ></a>	
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>Supplier List:</h4> 
+				<div class="forms">
+					<h3 class="title1">Add Employee</h3>
+
+                    <br><a href="employee-list.php"><input type="submit" name="submit" value="back" class="btn btn-primary" ></a>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4> Employee:</h4>
+						</div>
+						<div class="form-body">
+							<form method="post">
+								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
+    echo $msg;
+  }  ?> </p>
+
+  
+							 <div class="form-group"> <label for="exampleInputEmail1">Name</label> <input type="text" 
+							 class="form-control" id="name" name="name" placeholder="Full Name" value="" required="true"> 
+
+							 </div> <div class="form-group"> <label for="exampleInputPassword1">Email</label> <input type="email" 
+							 id="email" name="email" class="form-control" placeholder="Email" value="" required="true"> </div>
+
+							 <div class="form-group"> <label for="exampleInputEmail1">Mobile Number</label> <input type="text"
+							  class="form-control" id="mobilenum" name="mobilenum" placeholder="Mobile Number" value="" required="true"
+							   maxlength="10" pattern="[0-9]+"> </div>
+
+							 
+							 	
+							
+							  <button type="submit" name="submit" class="btn btn-default">Add</button> </form> 
+						</div>
 						
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Name</th> <th>Mobile</th> <th>Email</th>
-						 <th>Product Details</th> <th>Action</th> </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  suppliers");
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
-
-?>
-
-						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['name'];?></td> <td><?php 
-						  echo $row['contactno'];?></td><td><?php  echo $row['email'];?></td> 
-						  <td><?php  echo $row['Details'];?></td>
-						  <td><a href="edit-supplier-detail.php?editid=<?php 
-						  echo $row['ID'];?>">Edit</a>  ||  <a href="delete.php?addid=<?php echo $row['ID'];?>">elete</a></td> </tr>   <?php 
-$cnt=$cnt+1;
-}?></tbody> </table> 
 					</div>
-				</div>
+				
+				
 			</div>
 		</div>
-		
+		 
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
@@ -108,7 +128,7 @@ $cnt=$cnt+1;
 	<script src="js/scripts.js"></script>
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"> </script>
+   <script src="js/bootstrap.js"> </script>
 </body>
 </html>
-<?php }  ?>
+<?php } ?>

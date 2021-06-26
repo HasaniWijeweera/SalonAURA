@@ -9,16 +9,13 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 if(isset($_POST['submit']))
   {
    $name=$_POST['name'];
-    $email=$_POST['email'];
+   $email=$_POST['email'];
    $mobilenum=$_POST['mobilenum'];
-    $age=$_POST['age'];
-$details=$_POST['details'];
-   
- $eid=$_GET['editid'];
+   $eid=$_GET['editid'];
      
-    $query=mysqli_query($con, "update  users set name='$name',email='$email',contactno='$mobilenum',age='$age',Details='$details' where ID='$eid' ");
+    $query=mysqli_query($con, "tblemployees set Name='$name',email='$email',contactno='$mobilenum' where ID='$eid' ");
     if ($query) {
-    $msg="Customer Detail has been Updated.";
+    $msg="Employee Detail has been Updated.";
   }
   else
     {
@@ -74,14 +71,14 @@ $details=$_POST['details'];
 			<div class="main-page">
 			
 				<div class="forms"> 
-					<h3 class="title1">Update Customer</h3>
+					<h3 class="title1">Update Employee</h3>
 
 					<br>
-			 	<a href="customer-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
+			 	<a href="employee-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
 			
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">
-							<h4>Customer Details:</h4>
+							<h4>Employee Details:</h4>
 						</div>
 						<div class="form-body">
 							<form method="post">
@@ -90,7 +87,7 @@ $details=$_POST['details'];
   }  ?> </p>
   <?php
  $cid=$_GET['editid'];
-$ret=mysqli_query($con,"select * from  users where ID='$cid'");
+$ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -101,7 +98,7 @@ while ($row=mysqli_fetch_array($ret)) {
 							 <div class="form-group"> <label for="exampleInputPassword1">Email</label> <input type="text" id="email" name="email" class="form-control"  value="<?php  echo $row['email'];?>" required="true"> </div>
 							 <div class="form-group"> <label for="exampleInputPassword1">Mobile Number</label> <input type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['contactno'];?>" required="true"> </div>
 							 
-                   <div class="form-group"> <label for="exampleInputEmail1">Details</label> <textarea type="text" class="form-control" id="details" name="details" placeholder="Details" required="true" rows="12" cols="4"><?php  echo $row['Details'];?></textarea> </div>
+                  
                    
 
 							 <?php } ?>

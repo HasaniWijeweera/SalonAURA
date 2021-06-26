@@ -57,7 +57,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 					<h3 class="title1">Employee List</h3>
 					
 					<br>
-					<a href="add-customer.php"><input type="submit" name="submit" value="Add Employee" class="btn btn-primary" ></a>	
+					<a href="add-employee.php"><input type="submit" name="submit" value="Add Employee" class="btn btn-primary" ></a>	
 					<div class="table-responsive bs-example widget-shadow">
 						<h4>Employee List:</h4>
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Name</th> <th>Mobile</th> <th>Email</th><th>Action</th> </tr> </thead> <tbody>

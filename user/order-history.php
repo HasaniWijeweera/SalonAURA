@@ -59,7 +59,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 }
 
 </script>
-
+<?php include('includes/userheader3.php');?> <br><br><br>
 	</head>
 	
     <body class="cnt-home">
@@ -83,7 +83,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 			
 					<th class="cart-qty item">Quantity</th>
 					<th class="cart-sub-total item">Price Per unit</th>
-					<th class="cart-sub-total item">Shipping Charge</th>
+					<th class="cart-sub-total item">Shipping Chargeeeeeeeeeeeeeeeeeeeeeeeeeeeee</th>
 					<th class="cart-total item">Grandtotal</th>
 					<th class="cart-total item">Payment Method</th>
 					<th class="cart-description item">Order Date</th>

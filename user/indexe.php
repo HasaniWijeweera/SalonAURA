@@ -52,6 +52,28 @@ else
 	    <meta name="robots" content="all">
 
 	    <title>My Account</title>
+<!-- Customizable CSS --> <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="assets/css/main.css">
+	    <link rel="stylesheet" href="assets/css/green.css">
+	    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+		<link rel="stylesheet" href="assets/css/owl.transitions.css">
+		<!--<link rel="stylesheet" href="assets/css/owl.theme.css">-->
+		<link href="assets/css/lightbox.css" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/animate.min.css">
+		<link rel="stylesheet" href="assets/css/rateit.css">
+		<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+
+		<!-- Demo Purpose Only. Should be removed in production -->
+		<link rel="stylesheet" href="assets/css/config.css">
+
+		<link href="assets/css/green.css" rel="alternate stylesheet" title="Green color">
+		<link href="assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
+		<link href="assets/css/red.css" rel="alternate stylesheet" title="Red color">
+		<link href="assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
+		<link href="assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+		<link rel="shortcut icon" href="assets/images/favicon.ico">
 
 	    
 <script type="text/javascript">
@@ -86,8 +108,7 @@ return true;
 </script>
 
 	</head>
-    <body class="cnt-home">
-<header class="header-style-1">
+  
 
 	<!-- ============================================== TOP MENU ============================================== -->
 
@@ -95,41 +116,41 @@ return true;
 
 </header>
 <!-- ============================================== HEADER : END ============================================== -->
-<div class="breadcrumb">
-	<div class="container">
-		<div class="breadcrumb-inner">
-			<ul class="list-inline list-unstyled">
-			
-			</ul>
-		</div><!-- /.breadcrumb-inner -->
-	</div><!-- /.container -->
-</div><!-- /.breadcrumb -->
+
+
+
+	</head>
+	<?php include('includes/userheader3.php');?> <br><br><br>
+    <body class="cnt-home">
+
+
+
 
 <div class="body-content outer-top-bd">
 	<div class="container">
-		<div class="checkout-box inner-bottom-sm">
+		<div class="sign-in-page inner-bottom-sm">
 			<div class="row">
-				<div class="col-md-8">
-					<div class="panel-group checkout-steps" id="accordion">
-						<!-- checkout-step-01  -->
-<div class="panel panel-default checkout-step-01">
+				<!-- Sign-in -->	
+						
+<div class="col-md-6 col-sm-6 sign-in">
 
 	<!-- panel-heading -->
+	<div class="panel panel-default checkout-step-02">
 		<div class="panel-heading">
     	<h4 class="unicase-checkout-title">
-	        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
-	          <span>1</span>My Profile
+	        <a data-parent="#accordion">
+	          My Profile
 	        </a>
 	     </h4>
     </div>
     <!-- panel-heading -->
 
-	<div id="collapseOne" class="panel-collapse collapse in">
+	<div>
 
 		<!-- panel-body  -->
 	    <div class="panel-body">
 			<div class="row">		
-<h4>Personal info</h4>
+
 				<div class="col-md-12 col-sm-12 already-registered-login">
 
 <?php
@@ -160,6 +181,7 @@ while($row=mysqli_fetch_array($query))
 				</div>	
 				<!-- already-registered-login -->		
 
+			</div>
 			</div>			
 		</div>
 		<!-- panel-body  -->
@@ -167,16 +189,18 @@ while($row=mysqli_fetch_array($query))
 	</div><!-- row -->
 </div>
 <!-- checkout-step-01  -->
+
 					    <!-- checkout-step-02  -->
+						<div class="col-md-6 col-sm-6 sign-in"> 
 					  	<div class="panel panel-default checkout-step-02">
 						    <div class="panel-heading">
 						      <h4 class="unicase-checkout-title">
-						        <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseTwo">
-						          <span>2</span>Change Password
+						        <a  data-parent="#accordion" >
+						         Change Password
 						        </a>
 						      </h4>
 						    </div>
-						    <div id="collapseTwo" class="panel-collapse collapse">
+						    <div >
 						      <div class="panel-body">
 						     
 					<form class="register-form" role="form" method="post" name="chngpwd" onSubmit="return valid();">
@@ -208,7 +232,7 @@ while($row=mysqli_fetch_array($query))
 					  	
 					</div><!-- /.checkout-steps -->
 				</div>
-			<?php include('includes/myaccount-sidebar.php');?>
+			
 			</div><!-- /.row -->
 		</div><!-- /.checkout-box -->
 	
@@ -232,23 +256,7 @@ while($row=mysqli_fetch_array($query))
     <script src="assets/js/wow.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 
-	<!-- For demo purposes – can be removed on production -->
 	
-	<script src="switchstylesheet/switchstylesheet.js"></script>
-	
-	<script>
-		$(document).ready(function(){ 
-			$(".changecolor").switchstylesheet( { seperator:"color"} );
-			$('.show-theme-options').click(function(){
-				$(this).parent().toggleClass('open');
-				return false;
-			});
-		});
-
-		$(window).bind("load", function() {
-		   $('.show-theme-options').delay(2000).trigger('click');
-		});
-	</script>
 </body>
 </html>
 <?php } ?>
