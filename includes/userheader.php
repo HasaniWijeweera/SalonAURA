@@ -14,7 +14,7 @@
             <li class="nav-item"><a href="user/order-history.php" class="nav-link">History</a></li>
            
             <li class="nav-item"><a href="user/indexe.php" class="nav-link">My account</a></li>
-            <li class="nav-item"><a href="../index.php" class="nav-link">Logout</a></li>
+            <li class="nav-item"><a href="index.php" class="nav-link">Logout</a></li>
           </ul>
         </div>
       </div>

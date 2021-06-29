@@ -12,15 +12,46 @@
             </li>
 
             <li>
-              <a href="customer-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Customer </a>
+              <a href="customer-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Customer <span class="fa arrow"></a>
+              <ul class="nav nav-second-level collapse">
+                <li>
+                  <a href="customer-list.php">Customer List</a>
+                </li>
+                <li>
+                  <a href="customer-list.php">Customer Feedbacks</a>
+                </li>
+               
+              </ul>
             </li>
 
             <li>
-              <a href="supplier-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Supplier</a>
+              <a href="supplier-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Supplier<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level collapse">
+                <li>
+                  <a href="supplier-list.php">Supplier List</a>
+                </li>
+                <li>
+                  <a href="supplier-list.php">Product List</a>
+                </li>
+                <li>
+                  <a href="supplier-list.php">Product Purchase</a>
+                </li>
+              </ul>
             </li>
 
             <li>
-              <a href="employee-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Employee </a>
+              <a href="employee-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Employee <span class="fa arrow"></a>
+              <ul class="nav nav-second-level collapse">
+                <li>
+                  <a href="employee-list.php">Employee List</a>
+                </li>
+                <li>
+                  <a href="employee-list.php">Attendence</a>
+                </li>
+                <li>
+                  <a href="employee-list.php">Salary</a>
+                </li>
+              </ul>
             </li>
 
 
@@ -31,7 +62,7 @@
                   <a href="add-services.php">Add Services</a>
                 </li>
                 <li>
-                  <a href="manage-services.php">Manage Services</a>
+                  <a href="manage-services.php">Edit Services</a>
                 </li>
               </ul>
               <!-- /nav-second-level -->

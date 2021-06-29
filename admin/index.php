@@ -7,7 +7,7 @@ if(isset($_POST['login']))
   {
     $adminuser=$_POST['username'];
     $password=md5($_POST['password']);
-    $query=mysqli_query($con,"select ID from tbladmin where  UserName='$adminuser' && Password='$password' ");
+    $query=mysqli_query($con,"select ID from tbladmin where  email='$adminuser' && Password='$password' ");
     $ret=mysqli_fetch_array($query);
     if($ret>0){
       $_SESSION['bpmsaid']=$ret['ID'];
@@ -67,7 +67,7 @@ if(isset($_POST['login']))
 							<p style="font-size:16px; color:red" > <?php if($msg){
     echo $msg;
   }  ?> </p>
-							<input type="text" class="user" name="username" placeholder="Username" required="true">
+							<input type="text" class="user" name="username" placeholder="E-mail" required="true">
 							<input type="password" name="password" class="lock" placeholder="Password" required="true">
 							<input type="submit" name="login" value="Sign In">
 							<div class="forgot-grid">

@@ -1,6 +1,13 @@
 <?php
 session_start();
 error_reporting(0);
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 include('includes/config.php');
 if(strlen($_SESSION['login'])==0)
     {   
@@ -25,12 +32,25 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 if(isset($_POST['submit']))
 {
+// debug_to_console($_POST['cpass']);
+// debug_to_console($_SESSION['id']);
+// debug_to_console($_POST['newpass']);
+
 $sql=mysqli_query($con,"SELECT password FROM  users where password='".md5($_POST['cpass'])."' && id='".$_SESSION['id']."'");
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
- $con=mysqli_query($con,"update students set password='".md5($_POST['newpass'])."', updationDate='$currentTime' where id='".$_SESSION['id']."'");
-echo "<script>alert('Password Changed Successfully !!');</script>";
+
+ //$con=mysqli_query($con,"update students set password='".md5($_POST['newpass'])."', updationDate='$currentTime' where id='".$_SESSION['id']."'");
+ $sql = "UPDATE users SET password='".md5($_POST['newpass'])."' WHERE id='".$_SESSION['id']."'";
+ if(mysqli_query($con, $sql)){
+
+	 echo "<script>alert('Password Changed Successfully !!');</script>";
+ }
+ else{
+	echo "<script>alert('Password not changed !!');</script>";
+
+ }
 }
 else
 {
@@ -63,17 +83,7 @@ else
 		<link rel="stylesheet" href="assets/css/rateit.css">
 		<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
 
-		<!-- Demo Purpose Only. Should be removed in production -->
-		<link rel="stylesheet" href="assets/css/config.css">
-
-		<link href="assets/css/green.css" rel="alternate stylesheet" title="Green color">
-		<link href="assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
-		<link href="assets/css/red.css" rel="alternate stylesheet" title="Red color">
-		<link href="assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
-		<link href="assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
-		<link rel="shortcut icon" href="assets/images/favicon.ico">
+		
 
 	    
 <script type="text/javascript">

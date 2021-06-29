@@ -2,7 +2,13 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
 
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 // Code for User login
 if(isset($_POST['login']))
 {
@@ -10,6 +16,9 @@ if(isset($_POST['login']))
    $password=md5($_POST['password']);
 $query=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and password='$password'");
 $num=mysqli_fetch_array($query);
+$queryAdmin=mysqli_query($con,"select ID from tbladmin where  email='$email' && Password='$password' ");
+$retAdmin=mysqli_fetch_array($queryAdmin);
+
 if($num>0)
 {
 $extra="../userindex.php";
@@ -25,6 +34,15 @@ $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 header("location:http://$host$uri/$extra");
 exit();
 }
+elseif($retAdmin>0){
+	$extra="../admin/dashboard.php";
+	$_SESSION['bpmsaid']=$retAdmin['ID'];
+	$host=$_SERVER['HTTP_HOST'];
+	$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+	header("location:http://$host$uri/$extra");
+	exit();
+}
+
 else
 {
 $extra="login.php";

@@ -64,7 +64,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Name</th> <th>Mobile</th> <th>Email</th>
 						 <th>Product Details</th> <th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  suppliers");
+$ret=mysqli_query($con,"select * from  suppliers");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -74,7 +74,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						  echo $row['contactno'];?></td><td><?php  echo $row['email'];?></td> 
 						  <td><?php  echo $row['Details'];?></td>
 						  <td><a href="edit-supplier-detail.php?editid=<?php 
-						  echo $row['ID'];?>">Edit</a>  ||  <a href="delete.php?addid=<?php echo $row['ID'];?>">elete</a></td> </tr>   <?php 
+						  echo $row['id'];?>">Edit</a>  ||  <a href="supplier-delete.php?addid=<?php echo $row['id'];?>">Delete</a></td> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>

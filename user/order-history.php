@@ -2,6 +2,13 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 if(strlen($_SESSION['login'])==0)
     {   
 header('location:login.php');
@@ -24,8 +31,8 @@ else{
 	    <meta name="keywords" content="MediaCenter, Template, eCommerce">
 	    <meta name="robots" content="all">
 
-	    
-	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<title>My Order History</title>
+<!-- Customizable CSS --> <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="assets/css/main.css">
 	    <link rel="stylesheet" href="assets/css/green.css">
 	    <link rel="stylesheet" href="assets/css/owl.carousel.css">
@@ -36,17 +43,8 @@ else{
 		<link rel="stylesheet" href="assets/css/rateit.css">
 		<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
 
-		<!-- Demo Purpose Only. Should be removed in production -->
-		<link rel="stylesheet" href="assets/css/config.css">
 
-		<link href="assets/css/green.css" rel="alternate stylesheet" title="Green color">
-		<link href="assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
-		<link href="assets/css/red.css" rel="alternate stylesheet" title="Red color">
-		<link href="assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
-		<link href="assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
-		<link rel="shortcut icon" href="assets/images/favicon.ico">
+	
 	<script language="javascript" type="text/javascript">
 var popUpWin=0;
 function popUpWindow(URLStr, left, top, width, height)
@@ -64,78 +62,105 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 	
     <body class="cnt-home">
 	
-
-
-<div class="body-content outer-top-xs">
+	
+	
+	<div class="body-content outer-top-bd">
 	<div class="container">
-		<div class="row inner-bottom-sm">
-			<div class="shopping-cart">
-				<div class="col-md-12 col-sm-12 shopping-cart-table ">
-	<div class="table-responsive">
-<form name="history" method="post">	
+		<div class="sign-in-page inner-bottom-sm">
+			
+<div class=" sign-in">
 
+	<div class="panel panel-default checkout-step-02">
+		<div class="panel-heading">
+    	<h4 class="unicase-checkout-title">
+	        <a data-parent="#accordion">
+	          Upcoming Appointments
+	        </a>
+	     </h4>
+    </div>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Appointment Number</th>
+					
 					<th >Service</th>
-					<th >Beautician</th>
 					<th >Date</th>
 					<th >Time</th>
-					<th >Customer Email</th>
-					<th >Customer Phone Number</th>
-					<th >Booked Date</th>
-					<th >Feedback</th>
+					<th >Beautician</th>
+					<th >Action</th>
+					
+					
 					
 				</tr>
-			</thead><!-- /thead -->
-			
+			</thead>
+			<?php
+				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='remarked' AND email='".$_SESSION['login']."'";
+				$result = mysqli_query($con, $sql1);
+				if (mysqli_num_rows($result) > 0){
+					while($row = mysqli_fetch_assoc($result)){
+						echo "<tr>
+						<td>".$row["Services"]."</td>
+						<td>".$row['date']."</td>
+						<td>".$row['timeslot']."</td>
+						<td>".$row["beautician"]."</td>
+						<td>Delete</td>
+						</tr>";
+					}
+				}
+			?>
+
 			<tbody>
 
-<?php $query=mysqli_query($con,"select bookings.ID as pimg1,bookings.productName as pname,products.id as proid,orders.productId as opid,orders.quantity as qty,products.productPrice as pprice,products.shippingCharge as shippingcharge,orders.paymentMethod as paym,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.userId='".$_SESSION['id']."' and orders.paymentMethod is not null");
-$cnt=1;
-while($row=mysqli_fetch_array($query))
-{
-?>
-				<tr>
-					<td><?php echo $cnt;?></td>
-					<td class="cart-image">
-						<a class="entry-thumbnail" href="detail.html">
-						    <img src="admin/productimages/<?php echo $row['proid'];?>/<?php echo $row['pimg1'];?>" alt="" width="84" height="146">
-						</a>
-					</td>
-					<td class="cart-product-name-info">
-						<h4 class='cart-product-description'><a href="product-details.php?pid=<?php echo $row['opid'];?>">
-						<?php echo $row['pname'];?></a></h4>
-						
-						
-					</td>
-					<td class="cart-product-quantity">
-						<?php echo $qty=$row['qty']; ?>   
-		            </td>
-					<td class="cart-product-sub-total"><?php echo $price=$row['pprice']; ?>  </td>
-					<td class="cart-product-sub-total"><?php echo $shippcharge=$row['shippingcharge']; ?>  </td>
-					<td class="cart-product-grand-total"><?php echo (($qty*$price)+$shippcharge);?></td>
-					<td class="cart-product-sub-total"><?php echo $row['paym']; ?>  </td>
-					<td class="cart-product-sub-total"><?php echo $row['odate']; ?>  </td>
-					
-					<td>
- <a href="javascript:void(0);" onClick="popUpWindow('track-order.php?oid=<?php echo htmlentities($row['orderid']);?>');" title="Track order">
-					Track</td>
-				</tr>
-<?php $cnt=$cnt+1;} ?>
-				
-			</tbody><!-- /tbody -->
-		</table><!-- /table -->
-		
-	</div>
-</div>
+			</tbody>
 
-		</div><!-- /.shopping-cart -->
-		</div> <!-- /.row -->
-		</form>
-		</div><!-- /.container -->
-</div><!-- /.body-content -->
+		</table>
+	</div>
+
+	<br><br><br>
+
+	<div class="panel panel-default checkout-step-02">
+
+		<div class="panel-heading"><h4 class="unicase-checkout-title"><a data-parent="#accordion">Previous Appointments</a></h4></div>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					
+					<th >Service</th>
+					<th >Date</th>
+					<th >Time</th>
+					<th >Beautician</th>
+					<th >Action</th>
+					
+					
+					
+				</tr>
+			</thead>
+			<?php
+				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='' AND email='".$_SESSION['login']."'";
+				$result = mysqli_query($con, $sql1);
+				if (mysqli_num_rows($result) > 0){
+					while($row = mysqli_fetch_assoc($result)){
+						echo "<tr>
+						<td>".$row["Services"]."</td>
+						<td>".$row['date']."</td>
+						<td>".$row['timeslot']."</td>
+						<td>".$row["beautician"]."</td>
+						<td>Give Feedback</td>
+						</tr>";
+					}
+				}
+			?>
+			<tbody>
+
+			</tbody>
+
+		</table>
+	</div>
+	
+
+
+
+
+		
 
 
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
