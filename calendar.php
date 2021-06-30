@@ -104,6 +104,7 @@ function build_calendar($month, $year) {
             $dayname = strtolower(date('l', strtotime($date)));
             $eventNum = 0;
             $today = $date==date('Y-m-d')? "today" : "";
+            
         //     if ($dayname=='Sunday'){
         //   $calendar.="<td><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>Holiday</button>";
         //     }

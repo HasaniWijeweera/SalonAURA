@@ -16,24 +16,12 @@ $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
-              <p><?php  echo substr($row['PageDescription'],0,200);?> <a href="about.php">More.......</a></p><?php } ?>
+              <p><?php  echo substr($row['PageDescription'],0,500);?> </p><?php } ?>
             
             </div>
           </div>
          
-          <div class="col-md" style="padding-left: 150px">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="index.php" class="py-2 d-block">Home</a></li>
-                <li><a href="about.php" class="py-2 d-block">About</a></li>
-                <li><a href="services.php" class="py-2 d-block">Services</a></li>
-               
-                <li><a href="admin/index.php" class="py-2 d-block">Admin</a></li>
-                <li><a href="contact.php" class="py-2 d-block">Contact</a></li>
-              </ul>
-            </div>
-          </div>
+        
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
             	<h2 class="ftco-heading-2">Have a Questions?</h2>

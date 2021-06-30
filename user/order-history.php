@@ -93,7 +93,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 				</tr>
 			</thead>
 			<?php
-				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='remarked' AND email='".$_SESSION['login']."'";
+				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='' AND email='".$_SESSION['login']."' group by ApplyDate";
 				$result = mysqli_query($con, $sql1);
 				if (mysqli_num_rows($result) > 0){
 					while($row = mysqli_fetch_assoc($result)){
@@ -135,7 +135,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 				</tr>
 			</thead>
 			<?php
-				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='' AND email='".$_SESSION['login']."'";
+				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='remarked' AND email='".$_SESSION['login']."' group by ApplyDate";
 				$result = mysqli_query($con, $sql1);
 				if (mysqli_num_rows($result) > 0){
 					while($row = mysqli_fetch_assoc($result)){

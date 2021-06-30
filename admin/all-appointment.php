@@ -62,7 +62,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<h4>All Appointment:</h4>
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
 						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Mobile Number</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
+						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
 $ret=mysqli_query($con,"select *from  bookings group by ApplyDate");
 $cnt=1;
@@ -72,8 +72,12 @@ while ($row=mysqli_fetch_array($ret)) {
 
 						 <tr> <th scope="row"><?php echo $cnt;?></th>  
 						 
-						 <td><?php  echo $row['name'];?></td><td><?php 
-						  echo $row['PhoneNumber'];?></td><td><?php  echo $row['date'];?></td> <td><?php  echo $row['timeslot'];?></td>
+						 <td><?php  echo $row['name'];?></td>
+						 <td>
+						 <?php echo $row['Services'];?></td>
+						  <td><?php 
+						  echo $row['beautician'];?></td>
+						  <td><?php  echo $row['date'];?></td> <td><?php  echo $row['timeslot'];?></td>
 						    <td><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> || <a href="add-customer-services.php?addid=<?php echo $row['ID'];?>">Get Invoice</a> </td> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
