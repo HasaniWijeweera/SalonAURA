@@ -2,12 +2,14 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+ 
 <style>
 *{box-sizing:border-box;}
-body{font-family: 'Open Sans', sans-serif;  font-size:15px; background-image: url('bg-11.png'); padding:100px;   max-width: 500px; }
-.form_box{width:500px; padding:10px; background-color:transparent; }
+body{font-family: 'Open Sans', sans-serif;  font-size:15px; background-image: url('bg-11.png'); padding:100px;   max-width: 500px;}
+.form_box{width:500px; padding:10px; background-color:white; }
 input{padding:5px;  margin-bottom:5px; align:center;}
 input[type="submit"]{border:none; outlin:none; background-color:#da7dc2; color:white;}
 .heading{background-color:#e22a95; color:white; height:40px; width:100%; line-height:40px; text-align:center;}
@@ -18,7 +20,12 @@ box-shadow: 0px 0px 17px 1px rgba(0,0,0,0.43);}
 .pic{ width:33%; float:left; text-align: center;}
 </style>
 
+</head>
+
+
+
 <body>
+
  <div class="form_box shadow">
  <form method="post" action="practice_ac.php" position="center">
  <div class="heading">
@@ -81,6 +88,7 @@ box-shadow: 0px 0px 17px 1px rgba(0,0,0,0.43);}
  <textarea name=" suggestion" rows="8" cols="40"></textarea>
  <br><br>
   <input type="submit" name="submit" value="Submit Form">
+  <button class="btn "><a href="order-history.php">Back</a></button>
 </form>
  </div>
 </body>

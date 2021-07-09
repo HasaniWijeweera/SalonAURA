@@ -19,6 +19,9 @@ $num=mysqli_fetch_array($query);
 $queryAdmin=mysqli_query($con,"select ID from tbladmin where  email='$email' && Password='$password' ");
 $retAdmin=mysqli_fetch_array($queryAdmin);
 
+$queryEmp=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and password='$password' and role='1'");
+$ertEmp=mysqli_fetch_array($queryEmp);
+
 if($num>0)
 {
 $extra="../userindex.php";
@@ -37,6 +40,14 @@ exit();
 elseif($retAdmin>0){
 	$extra="../admin/dashboard.php";
 	$_SESSION['bpmsaid']=$retAdmin['ID'];
+	$host=$_SERVER['HTTP_HOST'];
+	$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+	header("location:http://$host$uri/$extra");
+	exit();
+}
+elseif($queryEmp>0){
+	$extra="../employee/emp_dash.php";
+	$_SESSION['id']=$queryEmp['id'];
 	$host=$_SERVER['HTTP_HOST'];
 	$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 	header("location:http://$host$uri/$extra");
