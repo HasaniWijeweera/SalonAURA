@@ -77,8 +77,10 @@ while ($row=mysqli_fetch_array($ret)) {
 						 <?php echo $row['Services'];?></td>
 						  <td><?php 
 						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td> <td><?php  echo $row['timeslot'];?></td>
-						    <td><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> || <a href="add-customer-services.php?addid=<?php echo $row['ID'];?>">Get Invoice</a> </td> </tr>   <?php 
+						  <td><?php  echo $row['date'];?></td>
+						   <td><?php  echo $row['timeslot'];?></td>
+						    <td><button class='btn btn-success btn-sm btn-flat edit'><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>"><i class='fa fa-edit'></i>View</a> </button>
+							<button class='btn btn-danger btn-sm btn-flat delete'> <a href="add-customer-services.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>
