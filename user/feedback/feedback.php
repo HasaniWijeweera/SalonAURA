@@ -27,7 +27,7 @@ box-shadow: 0px 0px 17px 1px rgba(0,0,0,0.43);}
 <body>
 
  <div class="form_box shadow">
- <form method="post" action="practice_ac.php" position="center">
+ <form method="post" action="practice_ac.php?orderID=<?php echo $_GET['orderID'];?>" position="center">
  <div class="heading">
    Salon AURA - Feedback Form 
  </div>
@@ -53,15 +53,15 @@ box-shadow: 0px 0px 17px 1px rgba(0,0,0,0.43);}
  <div>
    <div class="pic">
      <img src="bad.png" alt=""> <br/>
-     <input type="radio" name="quality" value="0"> Bad
+     <input type="radio" name="treatment" value="0"> Bad
    </div>
    <div class="pic">
      <img src="neutral.png" alt=""> <br/>
-     <input type="radio" name="quality" value="1"> Okay
+     <input type="radio" name="treatment" value="1"> Okay
    </div>
    <div class="pic">
      <img src="good.png" alt=""> <br/>
-     <input type="radio" name="quality" value="2"> Good
+     <input type="radio" name="treatment" value="2"> Good
    </div>
  </div>
  <br><br><br> <br><br><br> 
@@ -70,25 +70,25 @@ box-shadow: 0px 0px 17px 1px rgba(0,0,0,0.43);}
  <div>
    <div class="pic">
      <img src="bad.png" alt=""> <br/>
-     <input type="radio" name="quality" value="0"> Bad
+     <input type="radio" name="product" value="0"> Bad
    </div>
    <div class="pic">
      <img src="neutral.png" alt=""> <br/>
-     <input type="radio" name="quality" value="1"> Okay
+     <input type="radio" name="product" value="1"> Okay
    </div>
    <div class="pic">
      <img src="good.png" alt=""> <br/>
-     <input type="radio" name="quality" value="2"> Good
+     <input type="radio" name="product" value="2"> Good
    </div>
  </div>
-
+ <input type="hidden" id="Id" name="Id" value=<?php echo $_GET['orderID'] ?>>
   <br><br><br> <br><br><br> 
  
  <p>Do you have any suggestion for us? </p>
- <textarea name=" suggestion" rows="8" cols="40"></textarea>
+ <textarea name="suggestion" rows="8" cols="40"></textarea>
  <br><br>
   <input type="submit" name="submit" value="Submit Form">
-  <button class="btn "><a href="order-history.php">Back</a></button>
+<a href=".../order-history.php">Back</a>
 </form>
  </div>
 </body>

@@ -134,17 +134,31 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 				</tr>
 			</thead>
 			<?php
-				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='remarked' AND email='".$_SESSION['login']."' group by ApplyDate";
+				
+				
+				$sql1 = "SELECT  ID,Services, date, timeslot, beautician FROM bookings WHERE Remark='remarked' AND email='".$_SESSION['login']."' group by ApplyDate";
 				$result = mysqli_query($con, $sql1);
 				if (mysqli_num_rows($result) > 0){
-					while($row = mysqli_fetch_assoc($result)){?>
+					while($row = mysqli_fetch_assoc($result)){
+						$var="";
+						$clickmessage="Feedback";
+						$sql2="SELECT id FROM feedback where id='".$row['ID']."'";
+						$result2 = mysqli_query($con, $sql2);
+						if (mysqli_num_rows($result2) > 0){
+							$var="disabled color: red;";
+							$clickmessage="Feedback submitted";
+						}
+						?>
 
 						<tr>
 						<td><?php  echo  $row["Services"];?></td>
 						<td><?php  echo$row['date'];?></td>
 						<td><?php  echo$row['timeslot'];?></td>
 						<td><?php  echo$row["beautician"];?></td>
-						<td><button><a href="feedback/feedback.php">Feedback</a> </button></td>
+
+						<td>
+						
+						<button <?php echo $var;?>><a href="feedback/feedback.php?orderID=<?php echo$row['ID'];?>"><?php echo $clickmessage;?></a> </button></td>
 						</tr>
 						
 							<?php }} ?>

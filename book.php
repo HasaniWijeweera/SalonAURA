@@ -26,7 +26,10 @@ function debug_to_console($data) {
 
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
-
+$hidefield="";
+if(isset( $_SESSION['path'])){
+    $hidefield="type:hidden";
+}
 if(isset($_POST['submit'])){
     if(isset($_SESSION['beautician_name'])){
         $selectedBeautician= $_SESSION['beautician_name'];
@@ -283,7 +286,7 @@ Function timeslots($duration, $cleanup, $start, $end){
                             <label for="">Select a Beautician</label>
 		                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 		                      <!--  -->
-                              <input readonly type="text" class="form-control" id="beauty" value="<?php echo $_SESSION['beautician_name'] ?>" >
+                              <input readonly type="hidden" type="text" class="form-control" id="beauty" value="<?php echo $_SESSION['beautician_name'] ?>" >
 		                    </div>
 					    
                             <div class="form-group">

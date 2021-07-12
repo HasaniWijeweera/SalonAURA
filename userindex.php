@@ -8,6 +8,13 @@ include('includes/dbconnection.php');
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 if(isset($_SESSION['booking-success'])){
     if($_SESSION['booking-success']==1){
         echo '<script>alert("Booking success.")</script>';
@@ -15,6 +22,15 @@ if(isset($_SESSION['booking-success'])){
     }
     $_SESSION['booking-success']=0;
 
+}
+
+if(isset($_POST['checkdate'])){
+    debug_to_console($_POST['availabledate']);
+    $wanteddate=$_POST['availabledate'];
+    $host=$_SERVER['HTTP_HOST'];
+    $_SESSION['path']="date-path";
+    header("location:http://$host/SalonAURA/book.php?date=$wanteddate");
+    
 }
 if(isset($_POST['submit']))
   {
@@ -81,7 +97,11 @@ $_SESSION['aptno']=$result['AptNumber'];
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<?php include_once('includes/userheader.php');?>
+<?php include_once('includes/userheader.php');
+
+
+
+?>
 
 <body>
 
@@ -121,9 +141,16 @@ $_SESSION['aptno']=$result['AptNumber'];
                         <p>Now you can select the beautician as well as the time slot as you preffered...</p>
 
 
+                        <div style="display:flex;justify-content:space-around;">
+                        <form name="DateFilter" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
+                            <div class="datepicker">
+                                <input type="date" name="availabledate" required min=<?php echo date('Y-m-d');?>>
+                                <input name="checkdate"type="submit" >
+                            </div>
+                        </form>
                         <div class="dropdown">
-                            <button class="btn btn-secondary btn-info btn-lg dropdown-toggle" type="button"
+                            <button class="" type="button"
                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 Select beautician
@@ -141,6 +168,8 @@ $_SESSION['aptno']=$result['AptNumber'];
 
                             </div>
                         </div>
+                        </div>
+                        
                         <br><br><br><br><br>
 
                     </div>
