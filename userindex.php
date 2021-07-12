@@ -157,6 +157,7 @@ $_SESSION['aptno']=$result['AptNumber'];
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <?php
+                               
                                 $beauticianQuery="SELECT * FROM tblemployees";
                                 $beauticianNames=mysqli_query($con,$beauticianQuery);
                                 while($row = mysqli_fetch_array($beauticianNames))
@@ -183,6 +184,7 @@ $_SESSION['aptno']=$result['AptNumber'];
         </div>
         <?php
         if(isset($_GET['choice'])){
+            $_SESSION['path']="beautician-path";
             $beauticianQuery2="SELECT * FROM tblemployees where ID=".$_GET['choice']."";
             $beauticianName2=mysqli_query($con,$beauticianQuery2);
             while($row2 = mysqli_fetch_array($beauticianName2)){

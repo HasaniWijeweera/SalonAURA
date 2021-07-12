@@ -3,8 +3,20 @@ include('includes/dbconnection.php');
 session_start();
 error_reporting(0);
  $mysqli=new mysqli('localhost','root', '','mysalon'); 
+ debug_to_console($_SESSION['path']);
 if(isset($_GET['date'])){
-    $name=" ".$_SESSION['beautician_name'];
+    if(isset($_SESSION['path'])){
+
+        if($_SESSION['path']==="date-path"){
+            $name="";
+            debug_to_console($_SESSION['path']);
+        }
+        else{
+            debug_to_console($_SESSION['path']);
+
+            $name=" ".$_SESSION['beautician_name'];
+        }
+    }
     $date = $_GET['date'];
     $stmt=$mysqli->prepare("select * from bookings where date=? and beautician=?");
     $stmt->bind_param('ss',$date,$name);
@@ -27,26 +39,57 @@ function debug_to_console($data) {
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
 $hidefield="";
+$whenselectabeautician='type="hidden"';
 if(isset( $_SESSION['path'])){
-    $hidefield="type:hidden";
+    if($_SESSION['path']=="date-path"){
+        $whenselectabeautician='';
+        $hidefield='type="hidden"';
+    }
+   
 }
+if(isset($_POST['timeslot'])){
+    $temp = $_POST['timeslot'];
+    debug_to_console($temp);
+    }
 if(isset($_POST['submit'])){
     if(isset($_SESSION['beautician_name'])){
         $selectedBeautician= $_SESSION['beautician_name'];
     }
     else{
+
         $selectedBeautician=$_POST['beauty'];
+    }
+    if($hidefield=='type="hidden"'){
+        $beauty=$_POST['datepathselect'];
+
+    }
+    else{
+
+        $beauty=$selectedBeautician;
     }
     $name = $_POST['name'];
     $email = $_POST['email'];
     $timeslot = $_POST['timeslot'];
     $services=$_POST['services'];
-    $beauty=$selectedBeautician;
     $number=$_POST['number'];
     $aptnumber = mt_rand(100000000, 999999999);
     $duecheck=substr($timeslot,0,2);
     $duecheck=+$duecheck;
     //////////////////////////////////////////////////////////////////////////////////////////
+    $stmt = $mysqli->prepare("select * from bookings where date = ? AND timeslot=? AND beautician=?");
+    $stmt->bind_param('sss', $date, $timeslo," ".$beauty);
+    if($stmt->execute()){
+                debug_to_console("IM here in the execute");
+               
+                $result = $stmt->get_result();
+                if($result->num_rows>0){
+                    $canregister=1;
+                    echo '<script>alert("The time slot is not available.")</script>';
+
+
+                }
+            }
+    /////////////////////////////////////////////////////
     $beauticianDurationstmt=$mysqli->prepare("SELECT duration FROM taskduration where taskname=?");
     $beauticianDurationstmt->bind_param('s',$_POST['services']);
     $dbduration=0;
@@ -258,6 +301,7 @@ Function timeslots($duration, $cleanup, $start, $end){
                                     <label for="">Time Slot</label>
                                     <input readonly type="text" class="form-control" id="timeslot" name="timeslot">
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="">Name</label>
                                     <input reandonly type="text" class="form-control" name="name" value="<?php echo htmlentities($_SESSION['username']);?>" >
@@ -273,7 +317,9 @@ Function timeslots($duration, $cleanup, $start, $end){
 		                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 		                      <select name="services" id="services" required="true" class="form-control">
 		                      	<option value="">Select here</option>
-		                      	<?php $query=mysqli_query($con,"select * from tblservices");
+		                      	<?php 
+                                  debug_to_console($temp);
+                                  $query=mysqli_query($con,"select * from tblservices");
               while($row=mysqli_fetch_array($query))
               {
               ?>
@@ -286,7 +332,17 @@ Function timeslots($duration, $cleanup, $start, $end){
                             <label for="">Select a Beautician</label>
 		                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 		                      <!--  -->
-                              <input readonly type="hidden" type="text" class="form-control" id="beauty" value="<?php echo $_SESSION['beautician_name'] ?>" >
+                                <select <?php echo $whenselectabeautician;?>  id="beauty" name ="datepathselect" required="true" class="form-control">
+		                      	<option value="">Select here</option>
+                                  <?php $query=mysqli_query($con,"select * from tblemployees");
+                                    while($row=mysqli_fetch_array($query))
+                                    {
+                                    ?>
+
+                                    <option value="<?php echo $row['Name'];?>"><?php echo $row['Name'];?></option>
+		                       <?php } ?> 
+                                </select>
+                              <input <?php echo $hidefield;?>readonly  type="text" class="form-control" id="beauty" value="<?php echo $_SESSION['beautician_name'] ?>" >
 		                    </div>
 					    
                             <div class="form-group">
@@ -311,10 +367,13 @@ Function timeslots($duration, $cleanup, $start, $end){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
 $(".book").click(function(){
+    
     var timeslot = $(this).attr('data-timeslot');
     $("#slot").html(timeslot);
     $("#timeslot").val(timeslot);
     $("#myModal").modal("show");
+    //alert(timeslot);
+    
 });
 </script>
   

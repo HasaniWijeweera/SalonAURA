@@ -18,9 +18,15 @@ $query=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and password=
 $num=mysqli_fetch_array($query);
 $queryAdmin=mysqli_query($con,"select ID from tbladmin where  email='$email' && Password='$password' ");
 $retAdmin=mysqli_fetch_array($queryAdmin);
+$queryEmp=mysqli_query($con,"select ID from users where  email='$email' && Password='$password' && role='beau'");
+$retEmp=mysqli_fetch_array($queryEmp);
 
 
-if($num>0)
+if($retEmp>0){
+	$host=$_SERVER['HTTP_HOST'];
+	header("location:http://$host/SalonAURA/employee/emp_dash.php");
+}
+elseif($num>0)
 {
 $extra="../userindex.php";
 $_SESSION['login']=$_POST['email'];
