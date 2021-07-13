@@ -56,21 +56,24 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 				<div class="tables">
 					<h3 class="title1">Manage Services</h3>
 					
-					
+					<br>
+					<a href="add-services.php"><input type="submit" name="submit" value="Add Services" class="btn btn-primary" ></a>	
 				
 					<div class="table-responsive bs-example widget-shadow">
 						<h4>Update Services:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> <th>Creation Date</th><th>Action</th> </tr> </thead> <tbody>
+
+					
+						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> <th>Duartion (hrs)</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  tblservices");
+$ret=mysqli_query($con,"select *from  taskduration");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['ServiceName'];?></td> <td><?php  echo $row['Cost'];?></td><td><?php  echo $row['CreationDate'];?></td> 
+						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['taskname'];?></td> <td><?php  echo $row['Cost'];?></td><td><?php  echo $row['duration'];?></td> 
 						 <td><button class="btn btn-primary"><a href="edit-services.php?editid=<?php echo $row['ID'];?>">Edit</a></button> 
-						 <button class="btn btn-primary"><a href="edit-services.php?editid=<?php echo $row['ID'];?>">Delete</a></button>
+						 <button class="btn btn-primary"><a href="delete-services.php?addid=<?php echo $row['ID'];?>">Delete</a></button>
 						 </td> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 

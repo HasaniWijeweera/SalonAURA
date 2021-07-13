@@ -9,14 +9,15 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 if(isset($_POST['submit']))
   {
     $sername=$_POST['sername'];
-    $cost=$_POST['cost'];
+    $duartion=$_POST['duration'];
+	$cost=$_POST['cost'];
    
 
      
-    $query=mysqli_query($con, "insert into  tblservices(ServiceName,Cost) value('$sername','$cost')");
+    $query=mysqli_query($con, "insert into  taskduration (taskname,Cost,duration) value('$sername','$cost','$duartion')");
     if ($query) {
     	echo "<script>alert('Service has been added.');</script>"; 
-    		echo "<script>window.location.href = 'add-services.php'</script>";   
+    		echo "<script>window.location.href = 'manage-services.php'</script>";   
     $msg="";
   }
   else
@@ -84,7 +85,9 @@ if(isset($_POST['submit']))
   }  ?> </p>
 
   
-							 <div class="form-group"> <label for="exampleInputEmail1">Service Name</label> <input type="text" class="form-control" id="sername" name="sername" placeholder="Service Name" value="" required="true"> </div> <div class="form-group"> <label for="exampleInputPassword1">Cost</label> <input type="text" id="cost" name="cost" class="form-control" placeholder="Cost" value="" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputEmail1">Service Name</label> <input type="text" class="form-control" id="sername" name="sername" placeholder="Service Name" value="" required="true"> </div> 
+							 <div class="form-group"> <label for="exampleInputPassword1">Cost</label> <input type="text" id="cost" name="cost" class="form-control" placeholder="Cost" value="" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputPassword1">duration</label> <input type="text" id="duration" name="duration" class="form-control" placeholder="Duration" value="" required="true"> </div>
 							
 							  <button type="submit" name="submit" class="btn btn-primary">Add</button> </form> 
 						</div>

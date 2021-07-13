@@ -10,10 +10,11 @@ if(isset($_POST['submit']))
   {
     $sername=$_POST['sername'];
     $cost=$_POST['cost'];
+	$duration=$_POST['duration'];
    
  $eid=$_GET['editid'];
      
-    $query=mysqli_query($con, "update  tblservices set ServiceName='$sername',Cost='$cost' where ID='$eid' ");
+    $query=mysqli_query($con, "update  taskduration set taskname='$sername' ,duration='$duration',Cost='$cost' where ID='$eid' ");
     if ($query) {
     $msg="Service has been Updated.";
   }
@@ -82,14 +83,17 @@ if(isset($_POST['submit']))
   }  ?> </p>
   <?php
  $cid=$_GET['editid'];
-$ret=mysqli_query($con,"select * from  tblservices where ID='$cid'");
+$ret=mysqli_query($con,"select * from  taskduration where ID='$cid'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?> 
 
   
-							 <div class="form-group"> <label for="exampleInputEmail1">Service Name</label> <input type="text" class="form-control" id="sername" name="sername" placeholder="Service Name" value="<?php  echo $row['ServiceName'];?>" required="true"> </div> <div class="form-group"> <label for="exampleInputPassword1">Cost</label> <input type="text" id="cost" name="cost" class="form-control" placeholder="Cost" value="<?php  echo $row['Cost'];?>" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputEmail1">Service Name</label> 
+							 <input type="text" class="form-control" id="sername" name="sername" placeholder="Service Name" value="<?php  echo $row['taskname'];?>" required="true"> </div> 
+							 <div class="form-group"> <label for="exampleInputPassword1">Cost</label> <input type="text" id="cost" name="cost" class="form-control" placeholder="Cost" value="<?php  echo $row['Cost'];?>" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputPassword1">Duration</label> <input type="text" id="duration" name="duration" class="form-control" placeholder="duration" value="<?php  echo $row['duration'];?>" required="true"> </div>
 							 <?php } ?>
 							  <button type="submit" name="submit" class="btn btn-default">Update</button> </form> 
 						</div>

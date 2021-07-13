@@ -56,15 +56,9 @@
 
 
             <li>          
-              <a href="add-services.php"><i class="fa fa-cogs nav_icon"></i>Services<span class="fa arrow"></span> </a>
-              <ul class="nav nav-second-level collapse">
-                <li>
-                  <a href="add-services.php">Add Services</a>
-                </li>
-                <li>
-                  <a href="manage-services.php">Edit Services</a>
-                </li>
-              </ul>
+              <a href="manage-services.php"><i class="fa fa-cogs nav_icon"></i>Services </a>
+             
+              
               <!-- /nav-second-level -->
             </li>
             <li class="">
