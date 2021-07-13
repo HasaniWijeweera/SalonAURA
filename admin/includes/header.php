@@ -39,7 +39,7 @@ $num=mysqli_num_rows($ret1);
 while($result=mysqli_fetch_array($ret1))
 {
             ?>
-                 <a class="dropdown-item" href="view-appointment.php?viewid=<?php echo $result['ID'];?>">New appointment received from <?php echo $result['Name'];?> </a><br />
+                 <a class="dropdown-item" href="view-appointment.php?viewid=<?php echo $result['ID'];?>"><p>New appointment received from <?php echo $result['Name'];?> </p></a><br />
 <?php }} else {?>
     <a class="dropdown-item" href="all-appointment.php">No New Appointment Received</a>
         <?php } ?>

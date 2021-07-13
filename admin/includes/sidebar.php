@@ -18,7 +18,7 @@
                   <a href="customer-list.php">Customer List</a>
                 </li>
                 <li>
-                  <a href="customer-list.php">Customer Feedbacks</a>
+                  <a href="customer-feedback.php">Customer Feedbacks</a>
                 </li>
                
               </ul>

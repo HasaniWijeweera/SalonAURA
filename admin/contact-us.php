@@ -95,7 +95,7 @@ while ($row=mysqli_fetch_array($ret)) {
 							 <div class="form-group"> <label for="exampleInputEmail1">Page Title</label> <input type="text" class="form-control" name="pagetitle" id="pagetitle" value="<?php  echo $row['PageTitle'];?>" required="true"> </div><div class="form-group"> <label for="exampleInputEmail1">Email</label> <input type="text" class="form-control" name="email" id="email" value="<?php  echo $row['Email'];?>" required="true"> </div><div class="form-group"> <label for="exampleInputEmail1">Mobile Number</label> <input type="text" class="form-control" name="mobnumber" id="mobnumber" value="<?php  echo $row['MobileNumber'];?>" required="true"> </div><div class="form-group"> <label for="exampleInputEmail1">Timing</label> <input type="text" class="form-control" name="timing" id="timing" value="<?php  echo $row['Timing'];?>" required="true"> </div> <div class="form-group"> <label for="exampleInputPassword1">Page Description</label> <textarea name="pagedes" id="pagedes" rows="5" class="form-control">
         <?php  echo $row['PageDescription'];?></textarea> </div>
 							 <?php } ?>
-							  <button type="submit" name="submit" class="btn btn-default">Update</button> </form> 
+							  <button type="submit" name="submit" class="btn btn-primary">Update</button> </form> 
 						</div>
 						
 					</div>

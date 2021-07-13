@@ -73,8 +73,8 @@ while ($row=mysqli_fetch_array($ret)) {
 						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['name'];?></td> <td><?php 
 						  echo $row['contactno'];?></td><td><?php  echo $row['email'];?></td> 
 						  <td><?php  echo $row['Details'];?></td>
-						  <td><a href="edit-supplier-detail.php?editid=<?php 
-						  echo $row['id'];?>">Edit</a>  ||  <a href="supplier-delete.php?addid=<?php echo $row['id'];?>">Delete</a></td> </tr>   <?php 
+						  <td><button class="btn btn-primary"><a href="edit-supplier-detail.php?editid=<?php 
+						  echo $row['id'];?>">Edit</a></button> <button class="btn btn-primary"><a href="supplier-delete.php?addid=<?php echo $row['id'];?>">Delete</a></button> </td> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>

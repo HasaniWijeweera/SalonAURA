@@ -86,7 +86,7 @@ if(isset($_POST['submit']))
   
 							 <div class="form-group"> <label for="exampleInputEmail1">Service Name</label> <input type="text" class="form-control" id="sername" name="sername" placeholder="Service Name" value="" required="true"> </div> <div class="form-group"> <label for="exampleInputPassword1">Cost</label> <input type="text" id="cost" name="cost" class="form-control" placeholder="Cost" value="" required="true"> </div>
 							
-							  <button type="submit" name="submit" class="btn btn-default">Add</button> </form> 
+							  <button type="submit" name="submit" class="btn btn-primary">Add</button> </form> 
 						</div>
 						
 					</div>
