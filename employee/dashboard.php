@@ -4,15 +4,12 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } else{
-
-
-
-  ?>
+  } 
+     ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>Salon AURA | Welcome</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -36,6 +33,16 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 new WOW().init();
 	</script>
 <!--//end-animate-->
+<!-- chart -->
+<script src="js/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+<link rel="stylesheet" href="css/clndr.css" type="text/css" />
+<script src="js/underscore-min.js" type="text/javascript"></script>
+<script src= "js/moment-2.2.1.js" type="text/javascript"></script>
+<script src="js/clndr.js" type="text/javascript"></script>
+<script src="js/site.js" type="text/javascript"></script>
+<!--End Calender-->
 <!-- Metis Menu -->
 <script src="js/metisMenu.min.js"></script>
 <script src="js/custom.js"></script>
@@ -43,53 +50,15 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <!--//Metis Menu -->
 </head> 
 <body class="cbp-spmenu-push">
-	<div class="main-content">
-		<!--left-fixed -navigation-->
-		 <?php include_once('includes/sidebar.php');?>
-		<!--left-fixed -navigation-->
-		<!-- header-starts -->
-		 <?php include_once('includes/header.php');?>
-		<!-- //header-ends -->
-		<!-- main content start-->
-		<div id="page-wrapper">
-			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">All Appointment</h3>
-					
-					
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>All Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  bookings group by ApplyDate");
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
-
-?>
-
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							 </td> </tr>   <?php 
-$cnt=$cnt+1;
-}?></tbody> </table> 
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="main-content">
 		
+		 <?php include_once('includes/sidebar.php');?>
+		
+	<?php include_once('includes/header.php');?>
+		
+	
 	</div>
-	<!-- Classie -->
+	
 		<script src="js/classie.js"></script>
 		<script>
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
@@ -103,18 +72,17 @@ $cnt=$cnt+1;
 				disableOther( 'showLeftPush' );
 			};
 			
+
 			function disableOther( button ) {
 				if( button !== 'showLeftPush' ) {
 					classie.toggle( showLeftPush, 'disabled' );
 				}
 			}
 		</script>
-	<!--scrolling js-->
+	
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
-	<!--//scrolling js-->
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"> </script>
+	
+   <script src="js/bootstrap.js"> </script>
 </body>
 </html>
-<?php }  ?>

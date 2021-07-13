@@ -6,13 +6,32 @@
               <a href="dashboard.php"><i class="fa fa-home nav_icon"></i>Dashboard</a>
             </li>
 
-            <li>
-              <a href="all-appointment.php"><i class="fa fa-check-square-o nav_icon"></i>Appointment</a>
-              
-            </li>
+          
 
             <li>
-              <a href="customer-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Customer <span class="fa arrow"></a>
+              <a href="all-appointment.php" class="chart-nav"><i class="fa fa-check-square-o nav_icon"></i>Appointment <span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level collapse">
+              <li>
+                  <a href="all-appointment.php">All Appointments</a> 
+                </li>
+              <li>
+                  <a href="new-appointment.php">New Appointments</a>
+                </li>
+                <li>
+                  <a href="succ-appointment.php">Succces Appointments</a>
+                </li>
+                <li>
+                  <a href="reject-appointment.php">Rejected appointments</a>
+                </li>
+              
+               
+               
+              </ul>
+            </li>
+
+
+            <li>
+              <a href="customer-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Customer <span class="fa arrow"></span></a>
               <ul class="nav nav-second-level collapse">
                 <li>
                   <a href="customer-list.php">Customer List</a>
