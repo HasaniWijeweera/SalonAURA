@@ -70,8 +70,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 							</tr> 
 							</thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select distinct users.name,tblinvoice.BillingId,tblinvoice.PostingDate from  users   
-	join tblinvoice on users.ID=tblinvoice.Userid  order by tblinvoice.ID desc");
+$ret=mysqli_query($con,"select * from tblinvoice");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -82,7 +81,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						 	<td><?php  echo $row['BillingId'];?></td>
 						 	<td><?php  echo $row['name'];?></td>
 						 	<td><?php  echo $row['PostingDate'];?></td> 
-						 		<td><a href="view-invoice.php?invoiceid=<?php  echo $row['BillingId'];?>">View</a></td> 
+						 		<td><button class="btn btn-primary"><a href="view-invoice.php?invoiceid=<?php  echo $row['BillingId'];?>">View</a></button></td> 
 
 						  </tr>   <?php 
 $cnt=$cnt+1;

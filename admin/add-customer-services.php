@@ -78,7 +78,7 @@ echo "<script>window.location.href ='invoices.php'</script>";
 <form method="post">
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> <th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  tblservices");
+$ret=mysqli_query($con,"select *from  taskduration");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -86,7 +86,7 @@ while ($row=mysqli_fetch_array($ret)) {
 
  <tr> 
 <th scope="row"><?php echo $cnt;?></th> 
-<td><?php  echo $row['ServiceName'];?></td> 
+<td><?php  echo $row['taskname'];?></td> 
 <td><?php  echo $row['Cost'];?></td> 
 <td><input type="checkbox" name="sids[]" value="<?php  echo $row['ID'];?>" ></td> 
 </tr>   

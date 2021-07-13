@@ -24,7 +24,7 @@ $retEmp=mysqli_fetch_array($queryEmp);
 
 if($retEmp>0){
 	$host=$_SERVER['HTTP_HOST'];
-	header("location:http://$host/SalonAURA/employee/emp_dash.php");
+	header("location:http://$host/SalonAURA/employee/dashboard.php");
 }
 elseif($num>0)
 {

@@ -74,7 +74,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						  echo $row['contactno'];?></td><td><?php  echo $row['email'];?></td> 
 						  <td><?php  echo $row['Details'];?></td>
 						  <td><button class="btn btn-primary"><a href="edit-supplier-detail.php?editid=<?php 
-						  echo $row['id'];?>">Edit</a></button> <button class="btn btn-primary"><a href="supplier-delete.php?addid=<?php echo $row['id'];?>">Delete</a></button> </td> </tr>   <?php 
+						  echo $row['id'];?>">Edit</a></button> <button class="btn btn-primary"><a href="supplier-delete.php?addid=<?php echo $row['id'];?>"onclick="return confirm('Are you sure??')">Delete</a></button> </td> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>
