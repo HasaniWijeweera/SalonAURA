@@ -93,7 +93,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 				</tr>
 			</thead>
 			<?php
-				$sql1 = "SELECT  Services, date, timeslot, beautician FROM bookings WHERE Remark='' AND email='".$_SESSION['login']."' group by ApplyDate";
+				$sql1 = "SELECT  ID, Services, date, timeslot, beautician FROM bookings WHERE Status='' AND email='".$_SESSION['login']."' group by ApplyDate";
 				$result = mysqli_query($con, $sql1);
 				if (mysqli_num_rows($result) > 0){
 					while($row = mysqli_fetch_assoc($result)){?>
@@ -102,7 +102,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 						<td><?php echo$row['date'];?></td>
 						<td><?php echo$row['timeslot'];?></td>
 						<td><?php echo$row["beautician"];?></td>
-						<td><button ><a href="add-customer-services.php?addid=<?php echo $row['ID'];?>">Delete</a></button></td>
+						<td><button ><a href="delete-apppointment.php?addid=<?php echo $row['ID'];?>">Delete</a></button></td>
 						</tr>
 						<?php }} ?>
 
@@ -136,7 +136,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 			<?php
 				
 				
-				$sql1 = "SELECT  ID,Services, date, timeslot, beautician FROM bookings WHERE Remark='remarked' AND email='".$_SESSION['login']."' group by ApplyDate";
+				$sql1 = "SELECT  ID,Services, date, timeslot, beautician FROM bookings WHERE Status='1' AND email='".$_SESSION['login']."' group by ApplyDate";
 				$result = mysqli_query($con, $sql1);
 				if (mysqli_num_rows($result) > 0){
 					while($row = mysqli_fetch_assoc($result)){

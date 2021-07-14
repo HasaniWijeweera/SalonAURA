@@ -23,7 +23,6 @@ box-shadow: 0px 0px 17px 1px rgba(0,0,0,0.43);}
 </head>
 
 
-
 <body>
 
  <div class="form_box shadow">
@@ -88,7 +87,7 @@ box-shadow: 0px 0px 17px 1px rgba(0,0,0,0.43);}
  <textarea name="suggestion" rows="8" cols="40"></textarea>
  <br><br>
   <input type="submit" name="submit" value="Submit Form">
-<a href=".../order-history.php">Back</a>
+<a href=".../order-history.php">Back</a></button>
 </form>
  </div>
 </body>

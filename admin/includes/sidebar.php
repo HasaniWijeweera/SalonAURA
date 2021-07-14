@@ -49,11 +49,9 @@
                 <li>
                   <a href="supplier-list.php">Supplier List</a>
                 </li>
+
                 <li>
-                  <a href="supplier-list.php">Product List</a>
-                </li>
-                <li>
-                  <a href="supplier-list.php">Product Purchase</a>
+                  <a href="supplier-purchase.php">Product Purchase</a>
                 </li>
               </ul>
             </li>
