@@ -1,6 +1,14 @@
 <?php
 session_start();
 error_reporting(0);
+
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
@@ -8,26 +16,32 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 
 if(isset($_POST['submit']))
   {
-    $name=$_POST['name'];
-    $email=$_POST['email'];
-   $mobilenum=$_POST['mobilenum'];
-   $password=md5($_POST['password']);
-   $role=$_POST['role'];
-   $salary=$_POST['salary'];
- 
-     
-    $query=mysqli_query($con, "insert into  tblemployees (Name,email,contactno,password,role,salary) value('$name','$email','$mobilenum','$password','$role','$salary')");
+	  
+	  $name=$_POST['name'];
+	  $email=$_POST['email'];
+	  $mobilenum=$_POST['mobilenum'];
+	  $role=$_POST['role'];
+      $salary=$_POST['salary'];
+      $password=md5($_POST['password']);
+	  
+	  $eid=$_GET['editid'];
+
+    $query=mysqli_query($con, "UPDATE tblemployees set Name='$name',email='$email',contactno='$mobilenum' , role='$role', salary='$salary', password='$password' where ID='$eid' ");
     if ($query) {
-echo "<script>alert('Employee has been added.');</script>"; 
-echo "<script>window.location.href = 'employee-list.php'</script>"; 
- } else {
-echo "<script>alert('Something Went Wrong. Please try again.');</script>";  	
-} }
+    $msg="Supplier Details has been Updated.";
+  }
+  else
+    {
+      $msg="Something Went Wrong. Please try again";
+    }
+
+  
+}
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA | Add employee</title>
+<title>Salon AURA | Update Suppliers</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -68,50 +82,50 @@ echo "<script>alert('Something Went Wrong. Please try again.');</script>";
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="forms">
-					<h3 class="title1">Add Employee</h3>
+			
+				<div class="forms"> 
+					<h3 class="title1">Update Supplier</h3>
 
-                    <br><a href="employee-list.php"><input type="submit" name="submit" value="back" class="btn btn-primary" ></a>
+					<br>
+			 	<a href="employee-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
+			
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">
-							<h4> Employee:</h4>
+							<h4>Supplier Details:</h4>
 						</div>
 						<div class="form-body">
 							<form method="post">
 								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
     echo $msg;
   }  ?> </p>
+  <?php
+ $cid=$_GET['editid'];
+$ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
+$cnt=1;
+while ($row=mysqli_fetch_array($ret)) {
 
+?> 
+ 
   
-							 <div class="form-group"> <label>Name</label> <input type="text" 
-							 class="form-control" id="name" name="name" placeholder="Full Name" value="" required="true"> 
-
-						<label>Email</label> <input type="email" 
-							 id="email" name="email" class="form-control" placeholder="Email" value="" required="true">
-
-							<label >Mobile Number</label> <input type="text"
-							  class="form-control" id="mobilenum" name="mobilenum" placeholder="Mobile Number" value="" required="true"
-							   maxlength="10" pattern="[0-9]+"> 
-
-							   <label>Password</label> <input type="password" 
-							 id="password" name="password" class="form-control" placeholder="Password"  required="true"> 
-
-						 <label>Role</label> <input type="text" 
-							 class="form-control" id="role" name="role" placeholder="Role" value="" required="true"> 
-
-							 	<label>Basic Salary</label> <input type="text" 
-							 class="form-control" id="salary" name="salary" placeholder="Basic Salary" value="" required="true"> 
-<br>
-						
-							  <button type="submit" name="submit" class="btn btn-default">Add</button> </form> 
-						</div> 
+							 <div class="form-group"> <label >Name</label> <input type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['Name'];?>" required="true"> </div>
+							 
+							 <div class="form-group"> <label >Email</label> <input type="text" id="email" name="email" class="form-control"  value="<?php  echo $row['email'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Mobile Number</label> <input type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['contactno'];?>" required="true"> </div>
+                             <div class="form-group"> <label >role</label> <input type="text" id="role" name="role" class="form-control"  value="<?php  echo $row['role'];?>" required="true"> </div>
+                             <div class="form-group"> <label >Basic Salary</label> <input type="text" id="salary" name="salary" class="form-control"  value="<?php  echo $row['salary'];?>" required="true"> </div>
+                             <div class="form-group"> <label >Password</label> <input type="password" id="password" name="password" class="form-control"  value="<?php  echo $row['password'];?>" required="true"> </div>
+                   
+                             
+							 <?php } ?>
+							  <button type="submit" name="submit" class="btn btn-default">Update</button> </form> 
+						</div>
 						
 					</div>
 				
 				
 			</div>
 		</div>
-		 
+		
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
