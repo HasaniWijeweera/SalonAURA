@@ -19,7 +19,13 @@
         <div class="profile_details_left"><!--notifications of menu start -->
           <ul class="nofitications-dropdown">
             <?php
-$ret1=mysqli_query($con,"select ID,Name from  bookings where Status='' and ");
+            
+            $adid=$_SESSION['bpmsaid'];
+            $ret=mysqli_query($con,"select name from users where id='$adid'");
+            $row=mysqli_fetch_array($ret);
+            $name=$row['name'];
+
+$ret1=mysqli_query($con,"select ID,Name from  bookings where Status='' and beautician='$name' ");
 $num=mysqli_num_rows($ret1);
 
 ?>  
@@ -64,9 +70,9 @@ while($result=mysqli_fetch_array($ret1))
         <div class="profile_details">  
         <?php
 $adid=$_SESSION['bpmsaid'];
-$ret=mysqli_query($con,"select AdminName from tbladmin where ID='$adid'");
+$ret=mysqli_query($con,"select name from users where id='$adid'");
 $row=mysqli_fetch_array($ret);
-$name=$row['AdminName'];
+$name=$row['name'];
 
 ?> 
           <ul>
@@ -76,7 +82,7 @@ $name=$row['AdminName'];
                   <span class="prfil-img"><img src="images/download(1).png" alt="" width="50" height="60"> </span> 
                   <div class="user-name">
                     <p><?php echo $name; ?></p>
-                    <span>Administrator</span>
+                    <span>Employee</span>
                   </div>
                   <i class="fa fa-angle-down lnr"></i>
                   <i class="fa fa-angle-up lnr"></i>

@@ -18,12 +18,13 @@ $query=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and password=
 $num=mysqli_fetch_array($query);
 $queryAdmin=mysqli_query($con,"select ID from tbladmin where  email='$email' && Password='$password' ");
 $retAdmin=mysqli_fetch_array($queryAdmin);
-$queryEmp=mysqli_query($con,"select ID from users where  email='$email' && password='$password' && role='beau'");
+$queryEmp=mysqli_query($con,"select id from users where  email='$email' && password='$password' && role='beau'");
 $retEmp=mysqli_fetch_array($queryEmp);
 
 
 if($retEmp>0){
 	$host=$_SERVER['HTTP_HOST'];
+	$_SESSION['bpmsaid']=$retEmp['id'];
 	header("location:http://localhost/SalonAURA/employee/dashboard.php");
 }
 elseif($num>0)

@@ -1,6 +1,14 @@
 <?php
 session_start();
 error_reporting(0);
+
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
@@ -8,14 +16,19 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 
 if(isset($_POST['submit']))
   {
-   $name=$_POST['name'];
-   $email=$_POST['email'];
-   $mobilenum=$_POST['mobilenum'];
-   $product=['product'];
-
-   $eid=$_GET['editid'];
-     
-    $query=mysqli_query($con, "suppliers set name='$name', product='$product',email='$email',contactno='$mobilenum' where id='$eid' ");
+	  
+	  $name=$_POST['name'];
+	  $email=$_POST['email'];
+	  $mobilenum=$_POST['mobilenum'];
+	  $product=$_POST['product'];
+	  
+	  $eid=$_GET['editid'];
+	//   debug_to_console($name);
+	//   debug_to_console($email);
+	//   debug_to_console($mobilenum);
+	//   debug_to_console($product);
+	// 	debug_to_console($eid);
+    $query=mysqli_query($con, "UPDATE suppliers set name='$name', Details='$product',email='$email',contactno='$mobilenum' where id='$eid' ");
     if ($query) {
     $msg="Supplier Details has been Updated.";
   }
