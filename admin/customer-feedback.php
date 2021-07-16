@@ -64,14 +64,15 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Customer Name</th> <th>Beautician Name</th> <th>Treatment</th>
 						<th>score</th><th>score</th> <th>score</th> <th>Suggestions</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select * from  feedback");
+// $ret=mysqli_query($con,"select * from  feedback");
+$ret=mysqli_query($con,"select bookings.beautician,bookings.Services,bookings.name, feedback.quality_score,feedback.beauty_score,feedback.treat_score,feedback.feedback FROM bookings INNER JOIN  feedback ON bookings.ID=feedback.ID");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['id'];?></td> <td><?php 
-						  echo $row['id'];?></td><td><?php  echo $row['id'];?></td><td><?php  echo $row['quality_score'];?></td>  <td><?php  echo $row['treat_score'];?></td>
+						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['name'];?></td> <td><?php 
+						  echo $row['beautician'];?></td><td><?php  echo $row['Services'];?></td><td><?php  echo $row['quality_score'];?></td>  <td><?php  echo $row['treat_score'];?></td>
 						  <td><?php  echo $row['beauty_score'];?></td>
 						  <td> <?php  echo $row['feedback'];?>
 						 </td> </tr>   <?php 

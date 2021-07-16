@@ -11,7 +11,7 @@ if(isset($_POST['submit']))
     $name=$_POST['name'];
     $email=$_POST['email'];
    $mobilenum=$_POST['mobilenum'];
-    $password=$_POST['password'];
+    $password=md5($_POST['password']);
 	$age=$_POST['age'];
 $details=$_POST['details'];
  
@@ -99,7 +99,7 @@ echo "<script>alert('Something Went Wrong. Please try again.');</script>";
 							   <div class="form-group"> <label for="exampleInputEmail1">Age</label> <input type="text" 
 							 class="form-control" id="age" name="age" placeholder="Age" value="" required="true"> </div>
 							 
-							 <div class="form-group"> <label for="exampleInputEmail1">Password</label> <input type="text" class="form-control" id="password" name="password" placeholder="Sample Password" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputEmail1">Password</label> <input type="password" class="form-control" id="password" name="password" placeholder="Sample Password" required="true"> </div>
 							 <!-- <div class="radio">
 
                                <p style="padding-top: 20px; font-size: 15px"> <strong>Gender:</strong> <label>
