@@ -144,10 +144,7 @@ $_SESSION['aptno']=$result['AptNumber'];
                         <div style="display:flex;justify-content:space-around;">
                         <form name="DateFilter" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-                            <div class="datepicker">
-                                <input type="date" name="availabledate" required min=<?php echo date('Y-m-d');?>>
-                                <input name="checkdate"type="submit" >
-                            </div>
+                         
                         </form>
                         <div class="dropdown">
                             <button class="" type="button"

@@ -9,23 +9,9 @@
           
 
             <li>
-              <a href="all-appointment.php" class="chart-nav"><i class="fa fa-check-square-o nav_icon"></i>Appointment <span class="fa arrow"></span></a>
+              <a href="all-appointment.php" class="chart-nav"><i class="fa fa-check-square-o nav_icon"></i>Appointment</a>
               <ul class="nav nav-second-level collapse">
-              <li>
-                  <a href="all-appointment.php">All Appointments</a> 
-                </li>
-              <li>
-                  <a href="new-appointment.php">New Appointments</a>
-                </li>
-                <li>
-                  <a href="succ-appointment.php">Succces Appointments</a>
-                </li>
-                <li>
-                  <a href="reject-appointment.php">Rejected appointments</a>
-                </li>
-              
-               
-               
+             
               </ul>
             </li>
 

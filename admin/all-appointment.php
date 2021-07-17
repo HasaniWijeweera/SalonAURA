@@ -55,9 +55,10 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 			<div class="main-page">
 				<div class="tables">
 					<h3 class="title1">All Appointment</h3>
-					
-					
-				
+					<br>
+					<a href="new-appointment.php"><input type="submit" name="submit" value="New Appointments" class="btn btn-primary" ></a>	
+				    <a href="succ-appointment.php"><input type="submit" name="submit" value="Succeed Appointments" class="btn btn-primary" ></a>
+					<a href="reject-appointment.php"><input type="submit" name="submit" value="Rejected Apppointments" class="btn btn-primary" ></a>		
 					<div class="table-responsive bs-example widget-shadow">
 						<h4>All Appointment:</h4>
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> 

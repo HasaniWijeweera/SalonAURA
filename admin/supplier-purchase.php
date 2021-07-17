@@ -54,27 +54,29 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="tables">
-					<h3 class="title1">Supplier List</h3>
+					<h3 class="title1">Supplier Purchase</h3>
 					<br>
-					<a href="add-supplier.php"><input type="submit" name="submit" value="Add supplier" class="btn btn-primary" ></a>	
+					<a href="new-purchase.php"><input type="submit" name="submit" value="New Purchase" class="btn btn-primary" ></a>	
 				
 					<div class="table-responsive bs-example widget-shadow">
-						<h4>Supplier List:</h4> 
+						<h4>Supplier Purchase:</h4> 
 						
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Name</th> <th>Mobile</th> <th>Email</th>
-						 <th>Product Details</th> <th>Action</th> </tr> </thead> <tbody>
+						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Supplier Name</th> <th>Product Name</th> <th>Producr Price</th>
+						 <th>Quantity</th> <th>Total Price</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select * from  suppliers");
+$ret=mysqli_query($con,"select *, (ProductPrice * OrderQuantity) as totalprice from  purchase");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['name'];?></td> <td><?php 
-						  echo $row['contactno'];?></td><td><?php  echo $row['email'];?></td> 
-						  <td><?php  echo $row['Details'];?></td>
-						  <td><button class="btn btn-primary"><a href="edit-supplier-detail.php?editid=<?php 
-						  echo $row['id'];?>">Edit</a></button> <button class="btn btn-primary"><a href="supplier-delete.php?addid=<?php echo $row['id'];?>"onclick="return confirm('Are you sure??')">Delete</a></button> </td> </tr>   <?php 
+						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['supplier_name'];?></td> <td><?php  echo $row['ProductName'];?></td> 
+						  <td><?php  echo $row['ProductPrice'];?></td>
+						  <td><?php  echo $row['OrderQuantity']?></td>
+						  <td><?php  echo $row['totalprice']?></td>
+						  <td><button class="btn btn-primary"><a href="Purchase-invoice.php?editid=<?php 
+						  echo $row['id'];?>">Invoice</a></button> <button class="btn btn-primary"><a href="delete-purchase.php?addid=<?php 
+						  echo $row['id'];?>"onclick="return confirm('Are you sure??')">Delete</a></button> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>

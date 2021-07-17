@@ -62,7 +62,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<h4>Feedback List:</h4> 
 						
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Customer Name</th> <th>Beautician Name</th> <th>Treatment</th>
-						<th>score</th><th>score</th> <th>score</th> <th>Suggestions</th> </tr> </thead> <tbody>
+						<th>Salon Quality score</th><th>Treatment score</th> <th>Beautician score</th> <th>Suggestions</th> </tr> </thead> <tbody>
 <?php
 // $ret=mysqli_query($con,"select * from  feedback");
 $ret=mysqli_query($con,"select bookings.beautician,bookings.Services,bookings.name, feedback.quality_score,feedback.beauty_score,feedback.treat_score,feedback.feedback FROM bookings INNER JOIN  feedback ON bookings.ID=feedback.ID");
