@@ -12,7 +12,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || Customer List</title>
+<title>Salon AURA || B/W date Reports</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -54,28 +54,44 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="tables">
-					<h3 class="title1">Employee List</h3>
+					<h3 class="title1">All issued invoices</h3>
 					
-					<br>
-					<a href="add-employee.php"><input type="submit" name="submit" value="Add Employee" class="btn btn-primary" ></a>	
+					
+				
 					<div class="table-responsive bs-example widget-shadow">
-						<h4>Employee List:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Name</th> <th>Mobile</th> <th>Email</th> <th>Job Role</th> <th>Basic Salary</th> <th>Total Salary</th> <th>Action</th> </tr> </thead> <tbody>
+						<h4>All invoices issed between selected dates:</h4>
+ <?php
+$fdate=$_POST['fromdate'];
+$tdate=$_POST['todate'];
+
+?>
+<h5 align="center" style="color:blue">Report from <?php echo $fdate?> to <?php echo $tdate?></h5>
+
+						<table class="table table-bordered"> 
+							<thead> <tr> 
+								<th>#</th> 
+								<th>Invoice Id</th> 
+								<th>Customer Name</th> 
+								<th>Invoice Date</th> 
+								<th>Action</th>
+							</tr> 
+							</thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  tblemployees");
+$ret=mysqli_query($con,"select distinct users.Name,tblinvoice.BillingId,tblinvoice.PostingDate from  users   
+	join tblinvoice on users.ID=tblinvoice.Userid  where date(tblinvoice.PostingDate) between '$fdate' and '$tdate'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['Name'];?></td>
-						  <td><?php  echo $row['contactno'];?></td><td><?php  echo $row['email'];?></td> 
-						  <td><?php  echo $row['role'];?></td>
-						   <td><?php  echo $row['salary'];?></td>
-						   <td><?php  echo $row['salary'];?></td>
-						  <td><button class="btn btn-primary"><a href="edit-employee-details.php?editid=<?php echo $row['ID'];?>">Edit</a></button> 
-						  <button class="btn btn-primary"><a href="employee-delete.php?addid=<?php echo $row['ID'];?>" onclick="return confirm('Are you sure??')">Delete</a></button>
-						   <button class="btn btn-primary"><a href="salary-between.php?editid=<?php echo $row['ID'];?>">View Salary</a></button></td></tr><?php 
+						 <tr> 
+						 	<th scope="row"><?php echo $cnt;?></th> 
+						 	<td><?php  echo $row['BillingId'];?></td>
+						 	<td><?php  echo $row['Name'];?></td>
+						 	<td><?php  echo $row['PostingDate'];?></td> 
+						 		<td><a href="view-invoice.php?invoiceid=<?php  echo $row['BillingId'];?>">View</a></td> 
+
+						  </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>
