@@ -61,11 +61,12 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						</div>
 						<div class="form-body">
 						<?php
-$ret=mysqli_query($con,"select *from  tblemployees");
+ $cid=$_GET['editid'];
+$ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
 
 while ($row=mysqli_fetch_array($ret)) {
 
-?>
+?> 
 							<form method="post" name="bwdatesreport"  action="emp-salary.php?editid=<?php echo $row['ID'];?>" enctype="multipart/form-data">
 								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
     echo $msg;
@@ -77,7 +78,7 @@ while ($row=mysqli_fetch_array($ret)) {
 							 
 							
 							
-							  <button type="submit" name="submit" class="btn btn-default">Submit</button> </form> 
+							  <button class="btn btn-primary" type="submit" name="submit" class="btn btn-default">Submit</button> </form> 
 						</div>
 						
 					</div>
