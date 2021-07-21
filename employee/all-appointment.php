@@ -4,7 +4,7 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } else{
+  } else{ 
 
 
 
@@ -64,9 +64,14 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<!-- <th> Appointment Number</th> -->
 						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  bookings group by ApplyDate");
-$cnt=1;
+$adid=$_SESSION['bpmsaid'];
+$ret=mysqli_query($con,"select Name from tblemployees where id='$adid'");
+$row=mysqli_fetch_array($ret);
+$name=$row['Name'];
 while ($row=mysqli_fetch_array($ret)) {
+$ret1=mysqli_query($con,"select *from  bookings where beautician='$name'");
+$cnt=1;
+while ($row=mysqli_fetch_array($ret1)) {
 
 ?>
 
@@ -82,7 +87,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
 							 </td> </tr>   <?php 
 $cnt=$cnt+1;
-}?></tbody> </table> 
+}}?></tbody> </table> 
 					</div>
 				</div>
 			</div>

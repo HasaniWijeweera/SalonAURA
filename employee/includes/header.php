@@ -70,16 +70,16 @@ while($result=mysqli_fetch_array($ret1))
         <div class="profile_details">  
         <?php
 $adid=$_SESSION['bpmsaid'];
-$ret=mysqli_query($con,"select name from users where id='$adid'");
+$ret=mysqli_query($con,"select Name from tblemployees where id='$adid'");
 $row=mysqli_fetch_array($ret);
-$name=$row['name'];
+$name=$row['Name'];
 
 ?> 
           <ul>
             <li class="dropdown profile_details_drop">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img"> 
-                  <span class="prfil-img"><img src="images/download(1).png" alt="" width="50" height="60"> </span> 
+                  <span class="prfil-img"><img src="images/4128278.jpg" alt="" width="50" height="60"> </span> 
                   <div class="user-name">
                     <p><?php echo $name; ?></p>
                     <span>Employee</span>

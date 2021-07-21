@@ -59,17 +59,32 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="tables">
-					<h3 class="title1">All Appointment</h3>
+					<h3 class="title1">Employee details</h3>
+					<br><br>
 					
-					
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>Name:</h4>
-						<h4>Email:</h4>
-						<h4>Contact:</h4>
-						<h4>Email:</h4>
+					<?php
+$adminid=$_SESSION['bpmsaid'];
+$ret=mysqli_query($con,"select * from tblemployees where ID='$adminid'");
+$cnt=1;
+while ($row=mysqli_fetch_array($ret)) {
+
+?>
+						 <div class="form-group"> <label >Name</label> <input readonly  type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['Name'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Email</label> <input readonly  type="text"  id="email" name="email" class="form-control"  value="<?php  echo $row['email'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Mobile Number</label> <input readonly  type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['contactno'];?>" required="true"> </div>
+                             <div class="form-group"> <label >role</label> <input readonly  type="text" id="role" name="role" class="form-control"  value="<?php  echo $row['role'];?>" required="true"> </div>
+                             <div class="form-group"> <label >Basic Salary</label> <input readonly  type="text" id="salary" name="salary" class="form-control"  value="<?php  echo $row['salary'];?>" required="true"> </div>
+
+
+                             <div class="form-group"> <label >Discount Salary</label> <input readonly  type="text" id="dsalary" name="dsalary" class="form-control"  value="<?php  echo $row['discount_amount'];?>" required="true"> </div> 
+							 <button class="btn btn-primary"><a href="employee_appointment.php?editid=<?php echo $row['ID'];?>">View all discounts</a></button> <br><br>
+							 <div class="form-group"> <label >Total Salary</label> <input readonly  type="text" id="tsalary" name="tsalary" class="form-control"  value=<?php
+							 $total_sale=$row['discount_amount']+$row['salary'];
+							 $totalsale+=$total_sale;
+							  echo $totalsale;?> required="true"> </div>
 						
-					</div>
+					</div><?php } ?>
+				
 				</div>
 			</div>
 		</div>

@@ -31,70 +31,15 @@
 
 
             <li>
-              <a href="customer-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Customer <span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level collapse">
-                <li>
-                  <a href="customer-list.php">Customer List</a>
-                </li>
-                <li>
-                  <a href="customer-feedback.php">Customer Feedbacks</a>
-                </li>
-               
-              </ul>
-            </li>
-
-            <li>
-              <a href="supplier-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Supplier<span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level collapse">
-                <li>
-                  <a href="supplier-list.php">Supplier List</a>
-                </li>
-
-                <li>
-                  <a href="supplier-purchase.php">Product Purchase</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="employee-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Employee <span class="fa arrow"></a>
-              <ul class="nav nav-second-level collapse">
-                <li>
-                  <a href="employee-list.php">Employee List</a>
-                </li>
-                <li>
-                  <a href="employee-list.php">Attendence</a>
-                </li>
-                <li>
-                  <a href="employee-list.php">Salary</a>
-                </li>
-              </ul>
-            </li>
-
-
-            <li>          
-              <a href="manage-services.php"><i class="fa fa-cogs nav_icon"></i>Services </a>
+              <a href="customer-feedback.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Customer Feedbacks </a>
              
-              
-              <!-- /nav-second-level -->
             </li>
-            <li class="">
-              <a href="about-us.php"><i class="fa fa-book nav_icon"></i>Manage Content <span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level collapse">
-                <li>
-                  <a href="about-us.php">About Us</a>
-                </li>
-                <li>
-                  <a href="contact-us.php">Contact Us</a>
-                </li>
-              </ul>
-              <!-- /nav-second-level -->
-            </li>
-          
+
            
-           
-        
-          
+
+  
+
+
             
               <li>
               <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Reports<span class="fa arrow"></span></a>
