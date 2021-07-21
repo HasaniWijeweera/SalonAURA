@@ -6,13 +6,32 @@ if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
 
+if(isset($_POST['submit']))
+  {
+    $sername=$_POST['sername'];
+    $duartion=$_POST['duration'];
+	$cost=$_POST['cost'];
+   
 
+     
+    $query=mysqli_query($con, "insert into  taskduration (taskname,Cost,duration) value('$sername','$cost','$duartion')");
+    if ($query) {
+    	echo "<script>alert('Service has been added.');</script>"; 
+    		echo "<script>window.location.href = 'manage-services.php'</script>";   
+    $msg="";
+  }
+  else
+    {
+    echo "<script>alert('Something Went Wrong. Please try again.');</script>";  	
+    }
 
+  
+}
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>Salon AURA | Add Services</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -48,43 +67,34 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 <?php include_once('includes/sidebar.php');?>
 		<!--left-fixed -navigation-->
 		<!-- header-starts -->
-		 <?php include_once('includes/header.php');?>
+	 <?php include_once('includes/header.php');?>
 		<!-- //header-ends -->
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">New Appointment</h3>
-					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>	
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>New Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+				<div class="forms">
+					<h3 class="title1">Add Services</h3>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4>Our Services:</h4>
+						</div>
+						<div class="form-body">
+							<form method="post">
+								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
+    echo $msg;
+  }  ?> </p>
 
-?>
-
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
-$cnt=$cnt+1;
-}?></tbody> </table> 
+  
+							 <div class="form-group"> <label for="exampleInputEmail1">Service Name</label> <input type="text" class="form-control" id="sername" name="sername" placeholder="Service Name" value="" required="true"> </div> 
+							 <div class="form-group"> <label for="exampleInputPassword1">Cost</label> <input type="text" id="cost" name="cost" class="form-control" placeholder="Cost" value="" required="true"> </div>
+							 <div class="form-group"> <label for="exampleInputPassword1">duration</label> <input type="text" id="duration" name="duration" class="form-control" placeholder="Duration" value="" required="true"> </div>
+							
+							  <button type="submit" name="submit" class="btn btn-primary">Add</button> </form> 
+						</div>
+						
 					</div>
-				</div>
+				
+				
 			</div>
 		</div>
 		
@@ -114,7 +124,7 @@ $cnt=$cnt+1;
 	<script src="js/scripts.js"></script>
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"> </script>
+   <script src="js/bootstrap.js"> </script>
 </body>
 </html>
-<?php }  ?>
+<?php } ?>

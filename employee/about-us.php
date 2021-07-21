@@ -6,13 +6,28 @@ if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
 
+if(isset($_POST['submit']))
+  {
+  	$bpmsaid=$_SESSION['bpmsaid'];
+     $pagetitle=$_POST['pagetitle'];
+$pagedes=$_POST['pagedes'];
+     
+    $query=mysqli_query($con,"update tblpage set PageTitle='$pagetitle',PageDescription='$pagedes' where  PageType='aboutus'");
+    if ($query) {
+    $msg="About Us has been updated.";
+  }
+  else
+    {
+      $msg="Something Went Wrong. Please try again";
+    }
 
-
+  
+}
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>Salon AURA | About Us</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -40,7 +55,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <script src="js/metisMenu.min.js"></script>
 <script src="js/custom.js"></script>
 <link href="css/custom.css" rel="stylesheet">
-<!--//Metis Menu -->
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 </head> 
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -48,43 +64,40 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 <?php include_once('includes/sidebar.php');?>
 		<!--left-fixed -navigation-->
 		<!-- header-starts -->
-		 <?php include_once('includes/header.php');?>
+	 <?php include_once('includes/header.php');?>
 		<!-- //header-ends -->
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">New Appointment</h3>
-					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>	
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>New Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
+				<div class="forms">
+					<h3 class="title1">Update About Us</h3>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4>Update About Us:</h4>
+						</div>
+						<div class="form-body">
+							<form method="post">
+								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
+    echo $msg;
+  }  ?> </p>
+  <?php
+ 
+$ret=mysqli_query($con,"select * from  tblpage where PageType='aboutus'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
-$cnt=$cnt+1;
-}?></tbody> </table> 
+  
+							 <div class="form-group"> <label for="exampleInputEmail1">Page Title</label> <input type="text" class="form-control" name="pagetitle" id="pagetitle" value="<?php  echo $row['PageTitle'];?>" required="true"> </div> <div class="form-group"> <label for="exampleInputPassword1">Page Description</label> <textarea name="pagedes" id="pagedes" rows="5" class="form-control">
+        <?php  echo $row['PageDescription'];?></textarea> </div>
+							 <?php } ?>
+							  <button type="submit" name="submit" class="btn btn-primary">Update</button> </form> 
+						</div>
+						
 					</div>
-				</div>
+				
+				
 			</div>
 		</div>
 		
@@ -114,7 +127,7 @@ $cnt=$cnt+1;
 	<script src="js/scripts.js"></script>
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"> </script>
+   <script src="js/bootstrap.js"> </script>
 </body>
 </html>
-<?php }  ?>
+<?php } ?>

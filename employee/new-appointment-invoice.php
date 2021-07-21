@@ -12,7 +12,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>BPMS || Customer List</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -53,36 +53,81 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">New Appointment</h3>
-					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>	
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>New Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
+				<div class="tables" id="exampl">
+					<h3 class="title1">Invoice Details</h3>
+					
+	<?php
+	$invid=intval($_GET['invoiceid']);
+$ret=mysqli_query($con,"select DISTINCT  tblinvoice.PostingDate,users.name,users.email,users.contactno,users.age
+	from  tblinvoice 
+	join users on users.id=tblinvoice.Userid 
+	where tblinvoice.BillingId='$invid'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
-?>
+?>				
+				
+					<div class="table-responsive bs-example widget-shadow">
+						<h4>Invoice #<?php echo $invid;?></h4>
+						<table class="table table-bordered" width="100%" border="1"> 
+<tr>
+<th colspan="6">Customer Details</th>	
+</tr>
+							 <tr> 
+								<th>Name</th> 
+								<td><?php echo $row['name']?></td> 
+								<th>Contact no.</th> 
+								<td><?php echo $row['contactno']?></td>
+								<th>Email </th> 
+								<td><?php echo $row['email']?></td>
+							</tr> 
+							 <tr> 
+							    <th>Age</th> 
+								<td><?php echo $row['age']?></td>
+								<th>Invoice Date</th> 
+								<td colspan="3"><?php echo $row['PostingDate']?></td> 
+							</tr> 
+<?php }?>
+</table> 
+<table class="table table-bordered" width="100%" border="1"> 
+<tr>
+<th colspan="3">Services Details</th>	
+</tr>
+<tr>
+<th>#</th>	
+<th>Service</th>
+<th>Cost</th>
+</tr>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
+<?php
+$ret=mysqli_query($con,"select bookings.Services,taskduration.Cost  
+	from  bookings 
+	join taskduration on bookings.Services=taskduration.taskname 
+	");
+$cnt=1;
+while ($row=mysqli_fetch_array($ret)) {
+	?>
+
+<tr>
+<th><?php echo $cnt;?></th>
+<td><?php echo $row['Services']?></td>	
+<td><?php echo $subtotal=$row['Cost']?></td>
+</tr>
+<?php 
 $cnt=$cnt+1;
-}?></tbody> </table> 
+$gtotal+=$subtotal;
+} ?>
+
+<tr>
+<th colspan="2" style="text-align:center">Grand Total</th>
+<th><?php echo $gtotal?></th>	
+
+</tr>
+</table>
+  <p style="margin-top:1%"  align="center">
+  <i class="fa fa-print fa-2x" style="cursor: pointer;"  OnClick="CallPrint(this.value)" ></i>
+</p>
+
 					</div>
 				</div>
 			</div>
@@ -115,6 +160,17 @@ $cnt=$cnt+1;
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.js"> </script>
+	  <script>
+function CallPrint(strid) {
+var prtContent = document.getElementById("exampl");
+var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+WinPrint.document.write(prtContent.innerHTML);
+WinPrint.document.close();
+WinPrint.focus();
+WinPrint.print();
+WinPrint.close();
+}
+</script>
 </body>
 </html>
 <?php }  ?>

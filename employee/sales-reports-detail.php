@@ -12,7 +12,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>Salon AURA || Sales Reports</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -54,35 +54,102 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="tables">
-					<h3 class="title1">New Appointment</h3>
-					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>	
+					<h3 class="title1">Sales Reports</h3>
+					
+					
 				
 					<div class="table-responsive bs-example widget-shadow">
-						<h4>New Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
+						
+ 				  <?php
+$fdate=$_POST['fromdate'];
+$tdate=$_POST['todate'];
+$rtype=$_POST['requesttype'];
+?>
+<?php if($rtype=='mtwise'){
+$month1=strtotime($fdate);
+$month2=strtotime($tdate);
+$m1=date("F",$month1);
+$m2=date("F",$month2);
+$y1=date("Y",$month1);
+$y2=date("Y",$month2);
+    ?>
+<h4 class="header-title m-t-0 m-b-30">Sales Report Month Wise</h4>
+<h4 align="center" style="color:blue">Sales Report  from <?php echo $m1."-".$y1;?> to <?php echo $m2."-".$y2;?></h4>
+<hr />
+
+						<table class="table table-bordered">  <thead>
+<tr>
+<th>S.NO</th>
+<th>Month / Year </th>
+<th>Sales</th>
+</tr>
+</thead>
 <?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
+$ret=mysqli_query($con,"select month(PostingDate) as lmonth,year(PostingDate) as lyear,sum(Cost) as totalprice from  tblinvoice join tblservices on tblservices.ID= tblinvoice.ServiceId where date(tblinvoice.PostingDate) between '$fdate' and '$tdate' group by lmonth,lyear");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
+              
+                <tr>
+                    <td><?php echo $cnt;?></td>
+                  <td><?php  echo $row['lmonth']."/".$row['lyear'];?></td>
+              <td><?php  echo $total=$row['totalprice'];?></td>
+             
+                    </tr>
+                <?php
+$ftotal+=$total;
+$cnt++;
+}?>
+<tr>
+                  <td colspan="2" align="center">Total </td>
+              <td><?php  echo $ftotal;?></td>
+   
+                 
+                 
+                </tr></table> 
+                <?php } else {
+$year1=strtotime($fdate);
+$year2=strtotime($tdate);
+$y1=date("Y",$year1);
+$y2=date("Y",$year2);
+ ?>
+ <h4 class="header-title m-t-0 m-b-30">Sales Report Year Wise</h4>
+    <h4 align="center" style="color:blue">Sales Report  from <?php echo $y1;?> to <?php echo $y2;?></h4>
+    <hr />
+    <table class="table table-bordered">  <thead>
+<tr>
+<th>S.NO</th>
+<th>Year </th>
+<th>Sales</th>
+</tr>
+</thead>
+<?php
+$ret=mysqli_query($con,"select year(PostingDate) as lyear,sum(Cost) as totalprice from  tblinvoice join tblservices on tblservices.ID= tblinvoice.ServiceId where date(tblinvoice.PostingDate) between '$fdate' and '$tdate' group by lyear");
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
-$cnt=$cnt+1;
-}?></tbody> </table> 
+$cnt=1;
+while ($row=mysqli_fetch_array($ret)) {
+
+?>
+              
+                <tr>
+                    <td><?php echo $cnt;?></td>
+                   <td><?php  echo $row['lyear'];?></td>
+              <td><?php  echo $total=$row['totalprice'];?></td>
+             
+                    </tr>
+                <?php
+$ftotal+=$total;
+$cnt++;
+}?>
+<tr>
+                  <td colspan="2" align="center">Total </td>
+              <td><?php  echo $ftotal;?></td>
+   
+                 
+                 
+                </tr></table>
+                <?php } ?>	
 					</div>
 				</div>
 			</div>

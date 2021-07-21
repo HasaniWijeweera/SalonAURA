@@ -1,18 +1,18 @@
 <?php
 session_start();
 error_reporting(0);
+
+
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
 
-
-
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>Salon AURA | Update Suppliers</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -48,23 +48,48 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 <?php include_once('includes/sidebar.php');?>
 		<!--left-fixed -navigation-->
 		<!-- header-starts -->
-		 <?php include_once('includes/header.php');?>
+	 <?php include_once('includes/header.php');?>
 		<!-- //header-ends -->
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">New Appointment</h3>
+			
+				<div class="forms"> 
+					<h3 class="title1">Update Supplier</h3>
+
 					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>	
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>New Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
+			 	<a href="employee-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
+			
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">  
+							<?php
+$fdate=$_POST['fromdate'];
+$tdate=$_POST['todate'];
+
+?>
+  <?php
+ $cid=$_GET['editid'];
+$ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
+
+while ($row=mysqli_fetch_array($ret)) {
+    $name= $row['Name'];
+?> 
+							<h4>Supplier Details:  <?php echo $row['Name'] ?></h4>
+						</div>
+						<div class="form-body">
+							<form method="post">
+								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
+    echo $msg;
+  }  ?> </p>
+  
+
+
+                            
+<table class="table table-bordered"> <thead> <tr> <th>#</th> 
 						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
+						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
+$ret=mysqli_query($con,"select *from  bookings group by ApplyDate ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -79,12 +104,16 @@ while ($row=mysqli_fetch_array($ret)) {
 						  echo $row['beautician'];?></td>
 						  <td><?php  echo $row['date'];?></td>
 						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
+						    </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
+							 <?php } ?>
+							 
+						</div>
+						
 					</div>
-				</div>
+				
+				
 			</div>
 		</div>
 		
@@ -114,7 +143,7 @@ $cnt=$cnt+1;
 	<script src="js/scripts.js"></script>
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"> </script>
+   <script src="js/bootstrap.js"> </script>
 </body>
 </html>
-<?php }  ?>
+<?php } ?>

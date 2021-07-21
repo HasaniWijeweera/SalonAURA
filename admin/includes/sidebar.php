@@ -51,9 +51,7 @@
                 <li>
                   <a href="employee-list.php">Attendence</a>
                 </li>
-                <li>
-                  <a href="employee-list.php">Salary</a>
-                </li>
+               
               </ul>
             </li>
 

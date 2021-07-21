@@ -6,13 +6,27 @@ if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
 
-
-
+if(isset($_POST['submit']))
+  {
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+   $mobilenum=$_POST['mobilenum'];
+  
+$details=$_POST['details'];
+ 
+     
+    $query=mysqli_query($con, "insert into  suppliers(name,email,contactno, Details) value('$name','$email','$mobilenum','$details')");
+    if ($query) {
+echo "<script>alert('Supplier has been added.');</script>"; 
+echo "<script>window.location.href = 'supplier-list.php'</script>"; 
+ } else {
+echo "<script>alert('Something Went Wrong. Please try again.');</script>";  	
+} }
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>Salon AURA | Add Services</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -48,46 +62,48 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 <?php include_once('includes/sidebar.php');?>
 		<!--left-fixed -navigation-->
 		<!-- header-starts -->
-		 <?php include_once('includes/header.php');?>
+	 <?php include_once('includes/header.php');?>
 		<!-- //header-ends -->
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">New Appointment</h3>
-					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>	
-				
-					<div class="table-responsive bs-example widget-shadow">
-						<h4>New Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+				<div class="forms">
+					<h3 class="title1">Add supplier</h3>
 
-?>
+                    <br><a href="supplier-list.php"><input type="submit" name="submit" value="back" class="btn btn-primary" ></a>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4> Suppllier:</h4>
+						</div>
+						<div class="form-body">
+							<form method="post">
+								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
+    echo $msg;
+  }  ?> </p>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
-$cnt=$cnt+1;
-}?></tbody> </table> 
+  
+							 <div class="form-group"> <label for="exampleInputEmail1">Name</label> <input type="text" 
+							 class="form-control" id="name" name="name" placeholder="Full Name" value="" required="true"> 
+
+							 </div> <div class="form-group"> <label for="exampleInputPassword1">Email</label> <input type="email" 
+							 id="email" name="email" class="form-control" placeholder="Email" value="" required="true"> </div>
+
+							 <div class="form-group"> <label for="exampleInputEmail1">Mobile Number</label> <input type="text"
+							  class="form-control" id="mobilenum" name="mobilenum" placeholder="Mobile Number" value="" required="true"
+							   maxlength="10" pattern="[0-9]+"> </div>
+
+							 
+							 	<div class="form-group"> <label for="exampleInputEmail1">Product Details</label> <textarea type="text" class="form-control" id="details" name="details" required="true" rows="4" cols="4"></textarea> </div>
+							
+							  <button type="submit" name="submit" class="btn btn-default">Add</button> </form> 
+						</div>
+						
 					</div>
-				</div>
+				
+				
 			</div>
 		</div>
-		
+		 
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
@@ -114,7 +130,7 @@ $cnt=$cnt+1;
 	<script src="js/scripts.js"></script>
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"> </script>
+   <script src="js/bootstrap.js"> </script>
 </body>
 </html>
-<?php }  ?>
+<?php } ?>

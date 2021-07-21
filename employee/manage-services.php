@@ -12,7 +12,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || All Appointment</title>
+<title>BPMS || Manage Services</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -54,40 +54,36 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="tables">
-					<h3 class="title1">New Appointment</h3>
+					<h3 class="title1">Manage Services</h3>
+					
 					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>	
+					<a href="add-services.php"><input type="submit" name="submit" value="Add Services" class="btn btn-primary" ></a>	
 				
 					<div class="table-responsive bs-example widget-shadow">
-						<h4>New Appointment:</h4>
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
+						<h4>Update Services:</h4>
+
+					
+						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> <th>Duartion (hrs)</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
+$ret=mysqli_query($con,"select *from  taskduration");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
+						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['taskname'];?></td> <td><?php  echo $row['Cost'];?></td><td><?php  echo $row['duration'];?></td> 
+						 <td><button class="btn btn-primary"><a href="edit-services.php?editid=<?php echo $row['ID'];?>">Edit</a></button> 
+						 <button class="btn btn-primary"><a href="delete-services.php?addid=<?php echo $row['ID'];?>"onclick="return confirm('Are you sure??')">Delete</a></button>
+						 </td> </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>
 				</div>
 			</div>
 		</div>
-		
+		<!--footer-->
+		 <?php include_once('includes/footer.php');?>
+        <!--//footer-->
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
