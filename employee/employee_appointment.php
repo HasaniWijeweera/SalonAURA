@@ -1,18 +1,15 @@
 <?php
 session_start();
 error_reporting(0);
-
-
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } else{
-
-  ?>
+  } 
+     ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA | Update Suppliers</title>
+<title>Salon AURA | Welcome</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -36,6 +33,16 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 new WOW().init();
 	</script>
 <!--//end-animate-->
+<!-- chart -->
+<script src="js/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+<link rel="stylesheet" href="css/clndr.css" type="text/css" />
+<script src="js/underscore-min.js" type="text/javascript"></script>
+<script src= "js/moment-2.2.1.js" type="text/javascript"></script>
+<script src="js/clndr.js" type="text/javascript"></script>
+<script src="js/site.js" type="text/javascript"></script>
+<!--End Calender-->
 <!-- Metis Menu -->
 <script src="js/metisMenu.min.js"></script>
 <script src="js/custom.js"></script>
@@ -43,80 +50,45 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <!--//Metis Menu -->
 </head> 
 <body class="cbp-spmenu-push">
-	<div class="main-content">
-		<!--left-fixed -navigation-->
+<div class="main-content">
+		
 		 <?php include_once('includes/sidebar.php');?>
-		<!--left-fixed -navigation-->
-		<!-- header-starts -->
-	 <?php include_once('includes/header.php');?>
-		<!-- //header-ends -->
+		
+	<?php include_once('includes/header.php');?>
+
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-			
-				<div class="forms"> 
-					<h3 class="title1">Update Supplier</h3>
-
-					<br>
-			 	<a href="employee-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
-			
-					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
-						<div class="form-title">  
-							<?php
-$fdate=$_POST['fromdate'];
-$tdate=$_POST['todate'];
-
-?>
-  <?php
- $cid=$_GET['editid'];
-$ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
-
-while ($row=mysqli_fetch_array($ret)) {
-    $name= $row['Name'];
-?> 
-							<h4>Supplier Details:  <?php echo $row['Name'] ?></h4>
-						</div>
-						<div class="form-body">
-							<form method="post">
-								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
-    echo $msg;
-  }  ?> </p>
-  
-
-
-                            
-<table class="table table-bordered"> <thead> <tr> <th>#</th> 
-						<!-- <th> Appointment Number</th> -->
-						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  bookings group by ApplyDate ");
+				<div class="tables">
+					<h3 class="title1">Employee details</h3>
+					<br><br>
+					
+					<?php
+$adminid=$_SESSION['bpmsaid'];
+$ret=mysqli_query($con,"select * from tblemployees where ID='$adminid'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
+						 <div class="form-group"> <label >Name</label> <input readonly  type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['Name'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Email</label> <input readonly  type="text"  id="email" name="email" class="form-control"  value="<?php  echo $row['email'];?>" required="true"> </div>
+							 <div class="form-group"> <label >Mobile Number</label> <input readonly  type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['contactno'];?>" required="true"> </div>
+                             <div class="form-group"> <label >role</label> <input readonly  type="text" id="role" name="role" class="form-control"  value="<?php  echo $row['role'];?>" required="true"> </div>
+                             <div class="form-group"> <label >Basic Salary</label> <input readonly  type="text" id="salary" name="salary" class="form-control"  value="<?php  echo $row['salary'];?>" required="true"> </div>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th>  
-						 
-						 <td><?php  echo $row['name'];?></td>
-						 <td>
-						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
-						    </tr>   <?php 
-$cnt=$cnt+1;
-}?></tbody> </table> 
-							 <?php } ?>
-							 
-						</div>
+
+                             <div class="form-group"> <label >Discount Salary</label> <input readonly  type="text" id="dsalary" name="dsalary" class="form-control"  value="<?php  echo $row['discount_amount'];?>" required="true"> </div> 
+							 <button class="btn btn-primary"><a href="employee_appointment.php?editid=<?php echo $row['ID'];?>">View all discounts</a></button> <br><br>
+							 <div class="form-group"> <label >Total Salary</label> <input readonly  type="text" id="tsalary" name="tsalary" class="form-control"  value=<?php
+							 $total_sale=$row['discount_amount']+$row['salary'];
+							 $totalsale+=$total_sale;
+							  echo $totalsale;?> required="true"> </div>
 						
-					</div>
+					</div><?php } ?>
 				
-				
+				</div>
 			</div>
 		</div>
-		
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
@@ -132,6 +104,7 @@ $cnt=$cnt+1;
 				disableOther( 'showLeftPush' );
 			};
 			
+
 			function disableOther( button ) {
 				if( button !== 'showLeftPush' ) {
 					classie.toggle( showLeftPush, 'disabled' );
@@ -146,4 +119,3 @@ $cnt=$cnt+1;
    <script src="js/bootstrap.js"> </script>
 </body>
 </html>
-<?php } ?>

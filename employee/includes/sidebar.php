@@ -7,6 +7,10 @@
             </li>
 
           
+            <li>
+              <a href="employee_appointment.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Employee Details</a>
+             
+            </li>
 
             <li>
               <a href="all-appointment.php" class="chart-nav"><i class="fa fa-check-square-o nav_icon"></i>Appointment <span class="fa arrow"></span></a>
@@ -28,7 +32,6 @@
                
               </ul>
             </li>
-
 
             <li>
               <a href="customer-feedback.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Customer Feedbacks </a>

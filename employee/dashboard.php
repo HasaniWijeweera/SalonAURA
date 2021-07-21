@@ -55,39 +55,83 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		 <?php include_once('includes/sidebar.php');?>
 		
 	<?php include_once('includes/header.php');?>
-		<!-- main content start-->
-		<div id="page-wrapper">
+	<div id="page-wrapper" class="row calender widget-shadow">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">Employee details</h3>
-					<br><br>
-					
-					<?php
-$adminid=$_SESSION['bpmsaid'];
-$ret=mysqli_query($con,"select * from tblemployees where ID='$adminid'");
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
-
-?>
-						 <div class="form-group"> <label >Name</label> <input readonly  type="text" class="form-control" id="name" name="name"  value="<?php  echo $row['Name'];?>" required="true"> </div>
-							 <div class="form-group"> <label >Email</label> <input readonly  type="text"  id="email" name="email" class="form-control"  value="<?php  echo $row['email'];?>" required="true"> </div>
-							 <div class="form-group"> <label >Mobile Number</label> <input readonly  type="text" id="mobilenum" name="mobilenum" class="form-control"  value="<?php  echo $row['contactno'];?>" required="true"> </div>
-                             <div class="form-group"> <label >role</label> <input readonly  type="text" id="role" name="role" class="form-control"  value="<?php  echo $row['role'];?>" required="true"> </div>
-                             <div class="form-group"> <label >Basic Salary</label> <input readonly  type="text" id="salary" name="salary" class="form-control"  value="<?php  echo $row['salary'];?>" required="true"> </div>
-
-
-                             <div class="form-group"> <label >Discount Salary</label> <input readonly  type="text" id="dsalary" name="dsalary" class="form-control"  value="<?php  echo $row['discount_amount'];?>" required="true"> </div> 
-							 <button class="btn btn-primary"><a href="employee_appointment.php?editid=<?php echo $row['ID'];?>">View all discounts</a></button> <br><br>
-							 <div class="form-group"> <label >Total Salary</label> <input readonly  type="text" id="tsalary" name="tsalary" class="form-control"  value=<?php
-							 $total_sale=$row['discount_amount']+$row['salary'];
-							 $totalsale+=$total_sale;
-							  echo $totalsale;?> required="true"> </div>
-						
-					</div><?php } ?>
 				
+			
+				<div class="row calender widget-shadow">
+					<div class="row-one">
+					<div class="col-md-4 widget">
+						<?php $query1=mysqli_query($con,"Select * from users");
+$totalcust=mysqli_num_rows($query1);
+?>
+						<div class="stats-left ">
+							<h5>Total</h5>
+							<h4>Customer</h4>
+						</div>
+						<div class="stats-right">
+							<label> <?php echo $totalcust;?></label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="col-md-4 widget states-mdl">
+						<?php $query2=mysqli_query($con,"Select * from bookings");
+$totalappointment=mysqli_num_rows($query2);
+?>
+						<div class="stats-left">
+							<h5>Total</h5>
+							<h4>Appointment</h4>
+						</div>
+						<div class="stats-right">
+							<label> <?php echo $totalappointment;?></label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="col-md-4 widget states-last">
+						<?php $query3=mysqli_query($con,"Select * from bookings where Status='1'");
+$totalaccapt=mysqli_num_rows($query3);
+?>
+						<div class="stats-left">
+							<h5>Total</h5>
+							<h4>Accepted Apt</h4>
+						</div>
+						<div class="stats-right">
+							<label><?php echo $totalaccapt;?></label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="clearfix"> </div>	
 				</div>
-			</div>
-		</div>
+						
+					</div>
+
+				<div class="row calender widget-shadow">
+					<div class="row-one">
+					<div class="col-md-4 widget">
+						<?php $query4=mysqli_query($con,"Select * from bookings where Status='2'");
+$totalrejapt=mysqli_num_rows($query4);
+?>
+						<div class="stats-left ">
+							<h5>Total</h5>
+							<h4>Rejected Apt</h4>
+						</div>
+						<div class="stats-right">
+							<label> <?php echo $totalrejapt;?></label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<?php
+//Total Sale
+ $query19=mysqli_query($con,"Select * from  purchase");
+while($row19=mysqli_fetch_array($query19))
+{
+$total_sale=$row19['ProductPrice']* $row19['OrderQuantity'];
+$totalsale+=$total_sale;
+
+}
+ ?></div></div></div></div></div>
+		<!-- main content start-->
+	
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
