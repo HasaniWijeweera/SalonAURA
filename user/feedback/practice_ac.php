@@ -5,7 +5,7 @@ $treatment = $_POST['treatment'];
 $product = $_POST['product'];
 $feedbackID=$_POST['Id'];
 $conn = mysqli_connect("localhost", "root","", "mysalon");
-$query ="insert into feedback(id,quality_score, feedback,beauty_score,treat_score)values($feedbackID,$q_score, '$feedback_txt','$treatment','$product')";
+$query ="insert into feedback(id,quality_score, feedback,beauty_score,treat_score)values($feedbackID,$q_score,$feedback_txt,$treatment,$product)";
 $result = mysqli_query($conn, $query);
 if($result){
   $host=$_SERVER['HTTP_HOST'];

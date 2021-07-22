@@ -90,8 +90,8 @@ while ($row=mysqli_fetch_array($ret)) {
 						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
 <?php
 
-$ret2=mysqli_query($con,"select name, Services, beautician, date, timeslot from bookings");
-$cnt=1;
+$ret2=mysqli_query($con," select bookings.name,bookings.Services, bookings.beautician, bookings.date, bookings.timeslot, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where beautician='$name' AND Status='1' group by ApplyDate ");
+$cnt=1;      
 while ($row=mysqli_fetch_array($ret2)) {
 
 ?>
@@ -101,9 +101,11 @@ while ($row=mysqli_fetch_array($ret2)) {
 						 <td><?php  echo $row['name'];?></td>
 						 <td>
 						 <?php echo $row['Services'];?></td>
-						 
+						 <td>
+						 <?php echo $row['beautician'];?></td>
 						  <td><?php  echo $row['date'];?></td>
 						   <td><?php  echo $row['timeslot'];?></td>
+						   <td><?php  echo $row['Cost'];?></td>
 						    </tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
