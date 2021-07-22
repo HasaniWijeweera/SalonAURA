@@ -88,19 +88,18 @@ echo "<script>window.location.href ='invoices.php'</script>";
 </tr>
 
 <?php
-$ret=mysqli_query($con,"select * from bookings 
-	where bookings.ID='$uid'");
+$ret=mysqli_query($con,"select * from bookings ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 	?>
 
 <tr>
-
+<th scope="row"><?php echo $cnt;?></th> 
 <td><?php echo $row['Services']?></td>	
 <td><?php echo $row['Cost']?></td>
 </tr>
 <?php 
-} ?>
+$cnt=$cnt+1; } ?>
 
 
 </table>

@@ -3,6 +3,14 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 // Code user Registration
+function debug_to_console($data) {
+	$output = $data;
+	if (is_array($output))
+		$output = implode(',', $output);
+
+	echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
 if(isset($_POST['submit']))
 {
 $name=$_POST['fullname'];
@@ -11,12 +19,19 @@ $contactno=$_POST['contactno'];
 $age=$_POST['age'];
 $details=$_POST['details'];
 $password=md5($_POST['password']);
+$last_id = $con->insert_id;
+
+$_SESSION['lastid'] = $last_id;
+$last_id = $_SESSION['lastid'];
+
 $query=mysqli_query($con,"insert into users(name,email,contactno,password,age, Details) values('$name','$email','$contactno','$password','$age', '$details')");
 if($query)
 {
+	$last_id = $con->insert_id;
+	$_SESSION['lastid'] = $last_id;
 	echo "<script>alert('You are successfully register');</script>";
-	echo "<script>window.location.href = 'login.php'</script>"; 
-}
+	echo "<script>window.location.href = 'email.php'</script>"; }
+
 else{
 echo "<script>alert('Entered email already have an account');</script>";
 }
@@ -148,7 +163,7 @@ error:function (){}
 			  <a href="login.php" class="forgot-password pull-right">Already have an account?</a>
 		</div>
 		
-	  	<button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button" id="submit">Sign Up</button>
+	  	<button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button" id="submit">Sign Up</button><a href=""></a>
 
 
 
