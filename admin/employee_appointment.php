@@ -74,7 +74,7 @@ $ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
 while ($row=mysqli_fetch_array($ret)) {
     $name= $row['Name'];
 ?> 
-							<h4>Supplier Details:  <?php echo $row['Name'] ?></h4>
+							<h4>Employee Details:  <?php echo $row['Name'] ?></h4>
 						</div>
 						<div class="form-body">
 							<form method="post">
@@ -89,9 +89,10 @@ while ($row=mysqli_fetch_array($ret)) {
 						<!-- <th> Appointment Number</th> -->
 						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  bookings group by ApplyDate ");
+
+$ret2=mysqli_query($con,"select name, Services, beautician, date, timeslot from bookings");
 $cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+while ($row=mysqli_fetch_array($ret2)) {
 
 ?>
 
@@ -100,8 +101,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						 <td><?php  echo $row['name'];?></td>
 						 <td>
 						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
+						 
 						  <td><?php  echo $row['date'];?></td>
 						   <td><?php  echo $row['timeslot'];?></td>
 						    </tr>   <?php 

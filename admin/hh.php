@@ -88,7 +88,9 @@ echo "<script>window.location.href ='invoices.php'</script>";
 </tr>
 
 <?php
-$ret=mysqli_query($con,"select * from bookings ");
+$addid=$_GET['addid'];
+$_SESSION['eid']=$addid;
+$ret=mysqli_query($con,"select bookings.Services, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$addid' ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 	?>

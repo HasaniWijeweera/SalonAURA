@@ -100,11 +100,25 @@ while ($row=mysqli_fetch_array($ret)) {
 </tr>
 
 <?php
+$addid=$_SESSION['eid'];
+$ret2=mysqli_query($con,"select bookings.Services, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$addid' ");
 $ret=mysqli_query($con,"select taskduration.taskname,taskduration.Cost  
 	from  tblinvoice 
 	join taskduration on taskduration.ID=tblinvoice.ServiceId 
 	where tblinvoice.BillingId='$invid'");
 $cnt=1;
+while ($row=mysqli_fetch_array($ret2)) {
+	?>
+
+<tr>
+<th><?php echo $cnt;?></th>
+<td><?php echo $row['Services']?></td>	
+<td><?php echo $subtotal=$row['Cost']?></td>
+</tr>
+<?php 
+$cnt=$cnt+1;
+$gtotal+=$subtotal;
+}
 while ($row=mysqli_fetch_array($ret)) {
 	?>
 
@@ -116,7 +130,10 @@ while ($row=mysqli_fetch_array($ret)) {
 <?php 
 $cnt=$cnt+1;
 $gtotal+=$subtotal;
-} ?>
+}
+
+
+?>
 
 <tr>
 <th colspan="2" style="text-align:center">Grand Total</th>
