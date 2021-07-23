@@ -68,6 +68,7 @@ $tdate=$_POST['todate'];
 
 ?>
   <?php
+
  $cid=$_GET['editid'];
 $ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
 
@@ -90,7 +91,8 @@ while ($row=mysqli_fetch_array($ret)) {
 						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
 <?php
 
-$ret2=mysqli_query($con," select tblinvoice.BillingId,tblinvoice.PostingDate, users.name from tblinvoice INNER JOIN users ON tblinvoice.Userid=users.id where beautician='$name'  group by ApplyDate ");
+$ret2=mysqli_query($con," select bookings.name, bookings.Services,bookings.beautician,bookings.date, bookings.timeslot, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.date between $fdate and $tdate 
+ beautician='$name'  group by ApplyDate");
 $cnt=1;      
 while ($row=mysqli_fetch_array($ret2)) {
 
@@ -104,11 +106,27 @@ while ($row=mysqli_fetch_array($ret2)) {
 						 <td>
 						 <?php echo $row['beautician'];?></td>
 						  <td><?php  echo $row['date'];?></td>
-						   <td><?php  echo $row['timeslot'];?></td>
+
 						   <td><?php  echo $row['Cost'];?></td>
+
+						<?php   $gtotal=$row['Cost'] * 0.1;?>
+
+						   <td><?php  echo $gtotal;?></td>
 						    </tr>   <?php 
 $cnt=$cnt+1;
-}?></tbody> </table> 
+ $total+=$gtotal;
+ 
+}?></tbody> 
+
+
+<tr>  
+<th colspan="2" style="text-align:center">Grand Total</th>
+<th></th>
+<th></th><th></th><th></th><th> <?php echo $total?></th>	
+
+<?php $_SESSION['discount'] = $total;?>
+</tr>
+</table> 
 							 <?php } ?>
 							 
 						</div>

@@ -16,20 +16,12 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 
 if(isset($_POST['submit'])){
 
-	<?php 
-while ($row=mysqli_fetch_array($ret1)) {
-	$userid=$row['id'];
-
-	
-	debug_to_console($userid);
-	} 
 	
 $invoiceid=mt_rand(100000000, 999999999);
 $sid=$_POST['sids'];
 for($i=0;$i<count($sid);$i++){
    $svid=$sid[$i];
-$ret=mysqli_query($con,"insert into tblinvoice(Userid,ServiceId,BillingId) values('$userid','$svid','$invoiceid');");
-
+$ret=mysqli_query($con,"insert into tblinvoice(Userid,ServiceId,BillingId) values('9','$svid','$invoiceid');");
 
 echo '<script>alert("Invoice created successfully. Invoice number is "+"'.$invoiceid.'")</script>';
 echo "<script>window.location.href ='invoices.php'</script>";

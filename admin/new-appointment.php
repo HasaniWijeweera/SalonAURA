@@ -89,7 +89,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
 							<button class="btn btn-primary"> <a href="hh.php?bookid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
 $cnt=$cnt+1;
-
+$_SESSION['bookid'] = $bookingID;
 }?></tbody> </table> 
 					</div>
 				</div>
