@@ -65,11 +65,14 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 								<th>#</th> 
 								<th>Invoice Id</th> 
 								<th>Customer Name</th> 
+								
 								<th>Invoice Date</th> 
 								<th>Action</th>
 							</tr> 
 							</thead> <tbody>
 <?php
+$bname=$_SESSION['beid'];
+
 $ret=mysqli_query($con,"select tblinvoice.BillingId, tblinvoice.PostingDate,  users.name
 FROM tblinvoice
 INNER JOIN users ON tblinvoice.Userid = users.id GROUP BY tblinvoice.PostingDate ORDER BY tblinvoice.PostingDate DESC;");
@@ -82,10 +85,11 @@ while ($row=mysqli_fetch_array($ret)) {
 						 	<th scope="row"><?php echo $cnt;?></th> 
 						 	<td><?php  echo $row['BillingId'];?></td>
 						 	<td><?php  echo $row['name'];?></td>
+							
 						 	<td><?php  echo $row['PostingDate'];?></td> 
-						 		<td><button class="btn btn-primary"><a href="view-invoice.php?invoiceid=<?php  echo $row['BillingId'];?>">View</a></button></td> 
-
-						  </tr>   <?php 
+						 		<td>
+								 <button class="btn btn-primary"><a href="view-invoice.php?invoiceid=<?php  echo $row['BillingId'];?>">View</a></button>
+								 <button class="btn btn-primary"><a href="delete-invoice.php?invoiceid=<?php  echo $row['BillingId'];?>">Delete</a></button></td></tr>   <?php 
 $cnt=$cnt+1;
 }?></tbody> </table> 
 					</div>

@@ -1,4 +1,11 @@
 <?php
+function debug_to_console($data) {
+	$output = $data;
+	if (is_array($output))
+		$output = implode(',', $output);
+
+	echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
@@ -8,7 +15,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 if(isset($_POST['submit'])){
 
 
-$uid=intval($_GET['addid']);
+
 $invoiceid=mt_rand(100000000, 999999999);
 $sid=$_POST['sids'];
 for($i=0;$i<count($sid);$i++){
@@ -82,25 +89,34 @@ echo "<script>window.location.href ='invoices.php'</script>";
 <th colspan="3">Services Details</th>	
 </tr>
 <tr>
-<th>#</th>	
+<th>#</th>
+<th>Beautician Name</th>	
 <th>Service</th>
 <th>Cost</th>
 </tr>
 
 <?php
-$addid=$_GET['addid'];
-$_SESSION['eid']=$addid;
-$ret=mysqli_query($con,"select bookings.Services, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$addid' ");
+
+
+$bookid=$_SESSION['bookingID'];
+$ret=mysqli_query($con,"select bookings.Services, bookings.beautician,taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$bookid' ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 	?>
 
 <tr>
 <th scope="row"><?php echo $cnt;?></th> 
+<td><?php echo $row['beautician']?></td>
 <td><?php echo $row['Services']?></td>	
 <td><?php echo $row['Cost']?></td>
 </tr>
 <?php 
+
+$bname=$row['beautician'];
+$_SESSION['beid']=$bname;
+
+debug_to_console($bname);
+
 $cnt=$cnt+1; } ?>
 
 

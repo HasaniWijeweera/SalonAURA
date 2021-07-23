@@ -64,8 +64,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<!-- <th> Appointment Number</th> -->
 						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  bookings where Status='' group by ApplyDate");
-$cnt=1;
+$ret=mysqli_query($con,"select bookings.name,bookings.ID, bookings.Services, bookings.beautician, bookings.date, bookings.timeslot, users.id from bookings INNER JOIN users ON bookings.name=users.name where Status='' group by ApplyDate ");
+$cnt=1; 
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
@@ -80,8 +80,12 @@ while ($row=mysqli_fetch_array($ret)) {
 						  <td><?php  echo $row['date'];?></td>
 						   <td><?php  echo $row['timeslot'];?></td>
 						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?addid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
+							<button class="btn btn-primary"> <a href="hh.php?bookid=<?php echo $row['id'];?>">Invoice</a></button> </td> </tr>   <?php 
 $cnt=$cnt+1;
+
+$bookid=$row['ID'];
+$_SESSION['bookingID']=$bookid;
+
 }?></tbody> </table> 
 					</div>
 				</div>
