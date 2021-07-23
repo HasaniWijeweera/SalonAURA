@@ -11,24 +11,30 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } else{
+  } else{ 
+	  
+
 if(isset($_POST['submit'])){
 
+	<?php 
+while ($row=mysqli_fetch_array($ret1)) {
+	$userid=$row['id'];
 
-
+	
+	debug_to_console($userid);
+	} 
+	
 $invoiceid=mt_rand(100000000, 999999999);
 $sid=$_POST['sids'];
 for($i=0;$i<count($sid);$i++){
    $svid=$sid[$i];
-$ret=mysqli_query($con,"insert into tblinvoice(Userid,ServiceId,BillingId) values('$uid','$svid','$invoiceid');");
+$ret=mysqli_query($con,"insert into tblinvoice(Userid,ServiceId,BillingId) values('$userid','$svid','$invoiceid');");
 
 
 echo '<script>alert("Invoice created successfully. Invoice number is "+"'.$invoiceid.'")</script>';
 echo "<script>window.location.href ='invoices.php'</script>";
 }
-}
- 
-
+		}
 
   ?>
 <!DOCTYPE HTML>
@@ -98,7 +104,11 @@ echo "<script>window.location.href ='invoices.php'</script>";
 <?php
 
 
-$bookid=$_SESSION['bookingID'];
+
+$bookid = $_GET['bookid'];
+ 
+$ret1=mysqli_query($con,"select users.id from bookings INNER JOIN users ON bookings.email=users.email where bookings.ID='$bookid' ");
+
 $ret=mysqli_query($con,"select bookings.Services, bookings.beautician,taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$bookid' ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
@@ -115,9 +125,11 @@ while ($row=mysqli_fetch_array($ret)) {
 $bname=$row['beautician'];
 $_SESSION['beid']=$bname;
 
+
 debug_to_console($bname);
 
 $cnt=$cnt+1; } ?>
+
 
 
 </table>

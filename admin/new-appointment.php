@@ -1,4 +1,11 @@
 <?php
+function debug_to_console($data) {
+	$output = $data;
+	if (is_array($output))
+		$output = implode(',', $output);
+
+	echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
@@ -80,11 +87,8 @@ while ($row=mysqli_fetch_array($ret)) {
 						  <td><?php  echo $row['date'];?></td>
 						   <td><?php  echo $row['timeslot'];?></td>
 						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
-							<button class="btn btn-primary"> <a href="hh.php?bookid=<?php echo $row['id'];?>">Invoice</a></button> </td> </tr>   <?php 
+							<button class="btn btn-primary"> <a href="hh.php?bookid=<?php echo $row['ID'];?>">Invoice</a></button> </td> </tr>   <?php 
 $cnt=$cnt+1;
-
-$bookid=$row['ID'];
-$_SESSION['bookingID']=$bookid;
 
 }?></tbody> </table> 
 					</div>

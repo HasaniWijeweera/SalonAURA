@@ -1,4 +1,11 @@
-<?php
+<?php 
+function debug_to_console($data) {
+	$output = $data;
+	if (is_array($output))
+		$output = implode(',', $output);
+
+	echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
@@ -100,8 +107,9 @@ while ($row=mysqli_fetch_array($ret)) {
 </tr>
 
 <?php
-$addid=$_SESSION['eid'];
-$ret2=mysqli_query($con,"select bookings.Services, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$addid' ");
+$_SESSION['bookingID']=$bookid;
+debug_to_console($bookid);
+$ret2=mysqli_query($con,"select bookings.Services, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$bookid' ");
 $ret=mysqli_query($con,"select taskduration.taskname,taskduration.Cost  
 	from  tblinvoice 
 	join taskduration on taskduration.ID=tblinvoice.ServiceId 
