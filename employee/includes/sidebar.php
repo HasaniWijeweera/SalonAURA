@@ -28,19 +28,7 @@
 
 
             
-              <li>
-              <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Reports<span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level collapse">
-                    <li><a href="bwdates-reports-ds.php"> B/w dates</a></li>
-                   
-                    <li><a href="sales-reports.php">Sales Reports</a></li>
-              </ul>
-              <!-- //nav-second-level -->
-            </li>
-
-    <li>
-              <a href="invoices.php" class="chart-nav"><i class="fa fa-file-text-o nav_icon"></i>Invoices</a>
-            </li>
+            
             <!-- <li>
               <a href="search-appointment.php" class="chart-nav"><i class="fa fa-search nav_icon"></i>Search Appointment</a>
             </li>

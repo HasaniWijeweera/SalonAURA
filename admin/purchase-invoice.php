@@ -1,39 +1,18 @@
 <?php
-function debug_to_console($data) {
-	$output = $data;
-	if (is_array($output))
-		$output = implode(',', $output);
-
-	echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } else{ 
-	  
+  } else{
 
-if(isset($_POST['submit'])){
+    $ditid=$_GET['editid'];
 
-	
-
-$invoiceid=mt_rand(100000000, 999999999);
-$sid=$_POST['sids'];
-for($i=0;$i<count($sid);$i++){
-   $svid=$sid[$i];
-$ret=mysqli_query($con,"insert into tblinvoice(Userid,ServiceId,BillingId) values('124','$svid','$invoiceid');");
-
-echo '<script>alert("Invoice created successfully. Invoice number is "+"'.$invoiceid.'")</script>';
-echo "<script>window.location.href ='invoices.php'</script>";
-}
-		}
-		
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA || Assign Services</title>
+<title>Salon AURA || Customer List</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -74,92 +53,78 @@ echo "<script>window.location.href ='invoices.php'</script>";
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="tables">
-					<h3 class="title1">Assign Services</h3>
-					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="back" class="btn btn-primary" ></a>
+				<div class="tables" id="exampl">
+					<h3 class="title1">Purchase Invoice Details</h3>
+					
+	<?php
+	$invid=intval($_GET['invoiceid']);
+$ret=mysqli_query($con,"select * from purchase where id='$ditid'");
+$cnt=1;
+while ($row=mysqli_fetch_array($ret)) {
+
+?>				
 				
 					<div class="table-responsive bs-example widget-shadow">
-						<h4>Assign Services:</h4>
-<form method="post">
-
+						<h4>Invoice #<?php echo $invid;?></h4>
+						<table class="table table-bordered" width="100%" border="1"> 
+<tr>
+<th colspan="6">Supplier Details</th>	
+</tr>
+							 <tr> 
+								<th>Name</th> 
+								<td><?php echo $row['supplier_name']?></td> 
+								<th>Contact no.</th> 
+								<td><?php echo $row['ProductName']?></td>
+							
+							</tr> 
+							
+<?php }?>
+</table> 
 <table class="table table-bordered" width="100%" border="1"> 
 <tr>
-<th colspan="3">Services Details</th>	
+<th colspan="3">Purchase Details</th>	
 </tr>
 <tr>
-<th>#</th>
-<th>Beautician Name</th>	
-<th>Service</th>
+<th>#</th>	
+<th>Product</th>
+<th>Quatity</th>
 <th>Cost</th>
 </tr>
 
 <?php
-
-
-
-$bookid = $_GET['bookid'];
- 
-$ret1=mysqli_query($con,"select users.id from bookings INNER JOIN users ON bookings.email=users.email where bookings.ID='$bookid' ");
-while ($row=mysqli_fetch_array($ret1)) {}
-$ret=mysqli_query($con,"select bookings.Services, bookings.beautician,taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='$bookid' ");
+$ret=mysqli_query($con,"select * from purchase where id='$ditid'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 	?>
 
 <tr>
-<th scope="row"><?php echo $cnt;?></th> 
-<td><?php echo $row['beautician']?></td>
-<td><?php echo $row['Services']?></td>	
-<td><?php echo $row['Cost']?></td>
+<th><?php echo $cnt;?></th>
+<td><?php echo $row['ProductName']?></td>	
+<td><?php echo $row['ProductPrice']?></td>
+<td><?php echo $row['OrderQuantity']?></td>	
 </tr>
-<?php 
-
-$bname=$row['beautician'];
-$_SESSION['beid']=$bname;
-
-
-debug_to_console($bname);
-
-$cnt=$cnt+1; } ?>
-
-
-
-</table>
-
-
-<br><br><br><br>
-<h4>Assign Services:</h4><table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> <th>Action</th> </tr> </thead> <tbody>
-<?php
-$ret=mysqli_query($con,"select *from  taskduration");
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
-
-?>
-
- <tr> 
-<th scope="row"><?php echo $cnt;?></th> 
-<td><?php  echo $row['taskname'];?></td> 
-<td><?php  echo $row['Cost'];?></td> 
-<td><input type="checkbox" name="sids[]" value="<?php  echo $row['ID'];?>" ></td> 
-</tr>   
 <?php 
 $cnt=$cnt+1;
-}?>
+$gtotal=$row['ProductPrice']*$row['OrderQuantity'];
+} ?>
+
 <tr>
-<td colspan="4" align="center">
-<button type="submit" name="submit" class="btn btn-default">Submit</button>		
-</td>
+<th colspan="2" style="text-align:center">Grand Total</th>
+<th><?php echo $gtotal?></th>	
 
 </tr>
+</table>
+  <p style="margin-top:1%"  align="center">
+  <i class="fa fa-print fa-2x" style="cursor: pointer;"  OnClick="CallPrint(this.value)" ></i>
+</p>
 
-</tbody> </table> 
-</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+		<!--footer-->
+		 <?php include_once('includes/footer.php');?>
+        <!--//footer-->
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
@@ -187,6 +152,17 @@ $cnt=$cnt+1;
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.js"> </script>
+	  <script>
+function CallPrint(strid) {
+var prtContent = document.getElementById("exampl");
+var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+WinPrint.document.write(prtContent.innerHTML);
+WinPrint.document.close();
+WinPrint.focus();
+WinPrint.print();
+WinPrint.close();
+}
+</script>
 </body>
 </html>
 <?php }  ?>

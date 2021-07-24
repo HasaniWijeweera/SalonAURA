@@ -61,76 +61,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 			
 				<div class="row calender widget-shadow">
 					<div class="row-one">
-					<div class="col-md-4 widget">
-						<?php $query1=mysqli_query($con,"Select * from users");
-$totalcust=mysqli_num_rows($query1);
-?>
-						<div class="stats-left ">
-							<h5>Total</h5>
-							<h4>Customer</h4>
-						</div>
-						<div class="stats-right">
-							<label> <?php echo $totalcust;?></label>
-						</div>
-						<div class="clearfix"> </div>	
-					</div>
-					<div class="col-md-4 widget states-mdl">
-						<?php $query2=mysqli_query($con,"Select * from bookings");
-$totalappointment=mysqli_num_rows($query2);
-?>
-						<div class="stats-left">
-							<h5>Total</h5>
-							<h4>Appointment</h4>
-						</div>
-						<div class="stats-right">
-							<label> <?php echo $totalappointment;?></label>
-						</div>
-						<div class="clearfix"> </div>	
-					</div>
-					<div class="col-md-4 widget states-last">
-						<?php $query3=mysqli_query($con,"Select * from bookings where Status='1'");
-$totalaccapt=mysqli_num_rows($query3);
-?>
-						<div class="stats-left">
-							<h5>Total</h5>
-							<h4>Accepted Apt</h4>
-						</div>
-						<div class="stats-right">
-							<label><?php echo $totalaccapt;?></label>
-						</div>
-						<div class="clearfix"> </div>	
-					</div>
-					<div class="clearfix"> </div>	
-				</div>
-						
-					</div>
-
-				<div class="row calender widget-shadow">
-					<div class="row-one">
-					<div class="col-md-4 widget">
-						<?php $query4=mysqli_query($con,"Select * from bookings where Status='2'");
-$totalrejapt=mysqli_num_rows($query4);
-?>
-						<div class="stats-left ">
-							<h5>Total</h5>
-							<h4>Rejected Apt</h4>
-						</div>
-						<div class="stats-right">
-							<label> <?php echo $totalrejapt;?></label>
-						</div>
-						<div class="clearfix"> </div>	
-					</div>
-					<?php
-//Total Sale
- $query19=mysqli_query($con,"Select * from  purchase");
-while($row19=mysqli_fetch_array($query19))
-{
-$total_sale=$row19['ProductPrice']* $row19['OrderQuantity'];
-$totalsale+=$total_sale;
-
-}
- ?></div></div></div></div></div>
-		<!-- main content start-->
+					<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=43d8e25f-2549-4896-beb0-476ecc9c213b&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+					</div></div></div></div>
 	
 	</div>
 	<!-- Classie -->

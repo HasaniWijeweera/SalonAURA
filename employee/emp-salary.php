@@ -92,7 +92,7 @@ while ($row=mysqli_fetch_array($ret)) {
 
 
                              <div class="form-group"> <label >Discount Salary</label> <input readonly  type="text" id="dsalary" name="dsalary" class="form-control"  value="<?php  echo $row['discount_amount'];?>" required="true"> </div> 
-							 <button class="btn btn-primary"><a href="employee_appointment.php?editid=<?php echo $row['ID'];?>">View all discounts</a></button> <br><br>
+							 <button class="btn btn-primary"><a href="emp-appointment.php?editid=<?php echo $row['ID'];?>">View all discounts</a></button> <br><br>
 							 <div class="form-group"> <label >Total Salary</label> <input readonly  type="text" id="tsalary" name="tsalary" class="form-control"  value=<?php
 							 $total_sale=$row['discount_amount']+$row['salary'];
 							 $totalsale+=$total_sale;

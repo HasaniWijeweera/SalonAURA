@@ -65,6 +65,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 					
 					<?php
 $adminid=$_SESSION['bpmsaid'];
+$total=$_SESSION['gid'];
 $ret=mysqli_query($con,"select * from tblemployees where ID='$adminid'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
@@ -77,8 +78,8 @@ while ($row=mysqli_fetch_array($ret)) {
                              <div class="form-group"> <label >Basic Salary</label> <input readonly  type="text" id="salary" name="salary" class="form-control"  value="<?php  echo $row['salary'];?>" required="true"> </div>
 
 
-                             <div class="form-group"> <label >Discount Salary</label> <input readonly  type="text" id="dsalary" name="dsalary" class="form-control"  value="<?php  echo $row['discount_amount'];?>" required="true"> </div> 
-							 <button class="btn btn-primary"><a href="employee_appointment.php?editid=<?php echo $row['ID'];?>">View all discounts</a></button> <br><br>
+                             <div class="form-group"> <label >Discount Salary</label> <input readonly  type="text" id="dsalary" name="dsalary" class="form-control"  value="<?php  echo $total;?>" required="true"> </div> 
+							 <button class="btn btn-primary"><a href="emp-appointment.php?editid=<?php echo $row['ID'];?>">View all discounts</a></button> <br><br>
 							 <div class="form-group"> <label >Total Salary</label> <input readonly  type="text" id="tsalary" name="tsalary" class="form-control"  value=<?php
 							 $total_sale=$row['discount_amount']+$row['salary'];
 							 $totalsale+=$total_sale;

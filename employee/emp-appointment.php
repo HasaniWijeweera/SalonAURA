@@ -1,18 +1,18 @@
 <?php
 session_start();
 error_reporting(0);
+
+
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
 
-  
-
   ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Salon AURA |  B/W Reports</title>
+<title>Salon AURA | Update Suppliers</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
@@ -53,9 +53,90 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="forms">
+			
+				<div class="forms"> 
+					<h3 class="title1">All Appointments</h3>
+
+					<br>
+			 	<a href="employee_appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
+			
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">  
+							<?php
+$fdate=$_POST['fromdate'];
+$tdate=$_POST['todate'];
+
+?>
+  <?php
+
+ $cid=$_GET['editid'];
+$ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
+
+while ($row=mysqli_fetch_array($ret)) {
+    $name= $row['Name'];
+?> 
+							<h4>Employee Details:  <?php echo $row['Name'] ?></h4>
+						</div>
+						<div class="form-body">
+							<form method="post">
+								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
+    echo $msg;
+  }  ?> </p>
+  
+
+
+                            
+<table class="table table-bordered"> <thead> <tr> <th>#</th> 
+						<!-- <th> Appointment Number</th> -->
+						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
+<?php
+
+$ret2=mysqli_query($con," select bookings.name, bookings.Services,bookings.beautician,bookings.date, bookings.timeslot, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where
+ beautician='$name'  group by ApplyDate");
+$cnt=1;      
+while ($row=mysqli_fetch_array($ret2)) {
+
+?>
+
+						 <tr> <th scope="row"><?php echo $cnt;?></th>  
+						 
+						 <td><?php  echo $row['name'];?></td>
+						 <td>
+						 <?php echo $row['Services'];?></td>
+						 <td>
+						 <?php echo $row['beautician'];?></td>
+						  <td><?php  echo $row['date'];?></td>
+
+						   <td><?php  echo $row['Cost'];?></td>
+
+						<?php   $gtotal=$row['Cost'] * 0.1;?>
+
+						   <td><?php  echo $gtotal;?></td>
+						    </tr>   <?php 
+							
+						
+$cnt=$cnt+1;
+ $total+=$gtotal;
+ 
+}?></tbody> 
+
+
+<tr>  
+<th colspan="2" style="text-align:center">Grand Total</th>
+<th></th>
+<th></th><th></th><th></th><th> <?php echo $total?></th>	
+
+<?php $_SESSION['discount'] = $total;
+	$_SESSION['gid']=$total;
+	?>
+</tr>
+</table> 
+							 <?php } ?>
+							 
+						</div>
+						
+					</div>
 				
-				<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=b03c96a5-a765-496d-912a-d19f3a36968e&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
 				
 			</div>
 		</div>
