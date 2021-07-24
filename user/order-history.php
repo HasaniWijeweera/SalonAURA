@@ -93,7 +93,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 				</tr>
 			</thead>
 			<?php
-				$sql1 = "SELECT  ID, Services, date, timeslot, beautician FROM bookings WHERE Status='' AND email='".$_SESSION['login']."' group by ApplyDate";
+				$sql1 = "SELECT  ID, Services, date, timeslot, beautician FROM bookings WHERE Status='' AND email='".$_SESSION['login']."' GROUP BY ApplyDate order by date desc";
 				$result = mysqli_query($con, $sql1);
 				if (mysqli_num_rows($result) > 0){
 					while($row = mysqli_fetch_assoc($result)){?>

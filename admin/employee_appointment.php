@@ -91,7 +91,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
 <?php
 
-$ret2=mysqli_query($con," select bookings.name, bookings.Services,bookings.beautician,bookings.date, bookings.timeslot, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.date between $fdate and $tdate 
+$ret2=mysqli_query($con," select bookings.name, bookings.Services,bookings.beautician,bookings.date, bookings.timeslot, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where
  beautician='$name'  group by ApplyDate");
 $cnt=1;      
 while ($row=mysqli_fetch_array($ret2)) {

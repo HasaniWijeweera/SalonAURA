@@ -55,7 +55,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 			<div class="main-page">
 				<div class="forms">
 				
-				<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=4c9d87b1-42cd-4d45-b251-58b970630de5&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>	
+				<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=4c9d87b1-42cd-4d45-b251-58b970630de5&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
 				
 			</div>
 		</div>

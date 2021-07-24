@@ -64,7 +64,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Name</th> <th>Mobile</th> <th>Email</th>
 						<th>Age</th> <th>Health Details</th> <th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select * from  users");
+$ret=mysqli_query($con,"select * from  users order by regDate desc");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 

@@ -260,7 +260,12 @@ Function timeslots($duration, $cleanup, $start, $end){
                                     <label for="">Email</label>
                                     <input required type="email" class="form-control" name="email" value="<?php echo htmlentities($_SESSION['login']);?>">
                                 </div>
-                                
+                                <div class="form-group">
+                            <label for="">Select a Beautician</label>
+		                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+		                      <!--  -->
+                              <input readonly type="text" class="form-control" id="beauty" value="<?php echo $_SESSION['beautician_name'] ?>" >
+		                    </div>
                                 
 			                <div class="form-group">
                             <label for="">Select a Services</label>
@@ -276,12 +281,7 @@ Function timeslots($duration, $cleanup, $start, $end){
 		                      </select>
 		                    </div>
 
-                            <div class="form-group">
-                            <label for="">Select a Beautician</label>
-		                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-		                      <!--  -->
-                              <input readonly type="text" class="form-control" id="beauty" value="<?php echo $_SESSION['beautician_name'] ?>" >
-		                    </div>
+                            
 					    
                             <div class="form-group">
                                     <label for="">Mobile Number</label>

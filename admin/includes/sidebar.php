@@ -6,13 +6,12 @@
               <a href="dashboard.php"><i class="fa fa-home nav_icon"></i>Dashboard</a>
             </li>
 
-          
+            <li>          
+             
 
             <li>
-              <a href="all-appointment.php" class="chart-nav"><i class="fa fa-check-square-o nav_icon"></i>Appointment</a>
-              <ul class="nav nav-second-level collapse">
+              <a href="all-appointment.php"><i class="fa fa-check-square-o nav_icon"></i>Appointment</a>
              
-              </ul>
             </li>
 
 
@@ -43,16 +42,8 @@
             </li>
 
             <li>
-              <a href="employee-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Employee <span class="fa arrow"></a>
-              <ul class="nav nav-second-level collapse">
-                <li>
-                  <a href="employee-list.php">Employee List</a>
-                </li>
-                <li>
-                  <a href="employee-list.php">Attendence</a>
-                </li>
-               
-              </ul>
+              <a href="employee-list.php" class="chart-nav"><i class="fa fa-users nav_icon"></i>Employee</a>
+             
             </li>
 
 
@@ -77,18 +68,14 @@
           
            
            
-        
+            <li>          
+              <a href="bwdates-reports-ds.php"><i class="fa fa-check-square-o nav_icon"></i>Reports</a>
+             
+              
+              <!-- /nav-second-level -->
+            </li>
           
             
-              <li>
-              <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Reports<span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level collapse">
-                    <li><a href="bwdates-reports-ds.php"> B/w dates</a></li>
-                   
-                    <li><a href="sales-reports.php">Sales Reports</a></li>
-              </ul>
-              <!-- //nav-second-level -->
-            </li>
 
     <li>
               <a href="invoices.php" class="chart-nav"><i class="fa fa-file-text-o nav_icon"></i>Invoices</a>

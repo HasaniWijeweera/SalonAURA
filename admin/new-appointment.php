@@ -71,7 +71,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<!-- <th> Appointment Number</th> -->
 						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select bookings.name,bookings.ID, bookings.Services, bookings.beautician, bookings.date, bookings.timeslot, users.id from bookings INNER JOIN users ON bookings.name=users.name where Status='' group by ApplyDate ");
+$ret=mysqli_query($con,"select bookings.name,bookings.ID, bookings.Services, bookings.beautician, bookings.date, bookings.timeslot, users.id from bookings INNER JOIN users ON bookings.name=users.name where Status='' GROUP BY ApplyDate ");
 $cnt=1; 
 while ($row=mysqli_fetch_array($ret)) {
 
