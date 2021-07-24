@@ -148,7 +148,7 @@ if(isset($_POST['submit'])){
             $ret=mysqli_query($con,"select id from bookings where email='$email' and  PhoneNumber='$phone'");
             $result=mysqli_fetch_array($ret);
             $_SESSION['aptno']=$result['id'];
-            echo "<script>window.location.href='thank-you.php'</script>";
+            echo "<script>window.location.href='email1.php'</script>";
             $stmt->execute();
             $msg = "<div class='alert alert-success'>Booking Successfull</div>";
             $bookings[] = $timeslot;

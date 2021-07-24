@@ -25,7 +25,7 @@
             $row=mysqli_fetch_array($ret);
             $name=$row['name'];
 
-$ret1=mysqli_query($con,"select ID,Name from  bookings where Status='' and beautician='$name' ");
+$ret1=mysqli_query($con,"select ID,Name from  bookings where  beautician='Dilini Randeniya' and Status=''");
 $num=mysqli_num_rows($ret1);
 
 ?>  

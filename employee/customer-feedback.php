@@ -65,7 +65,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<th>Salon Quality score</th><th>Treatment score</th> <th>Beautician score</th> <th>Suggestions</th> </tr> </thead> <tbody>
 <?php
 // $ret=mysqli_query($con,"select * from  feedback");
-$ret=mysqli_query($con,"select bookings.beautician,bookings.Services,bookings.name, feedback.quality_score,feedback.beauty_score,feedback.treat_score,feedback.feedback FROM bookings INNER JOIN  feedback ON bookings.ID=feedback.ID");
+$ret=mysqli_query($con,"select bookings.beautician,bookings.Services,bookings.name, feedback.quality_score,feedback.beauty_score,feedback.treat_score,feedback.feedback FROM bookings INNER JOIN  feedback ON bookings.ID=feedback.ID where beautician='Dilini Randeniya'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 

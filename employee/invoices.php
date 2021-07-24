@@ -70,7 +70,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 							</tr> 
 							</thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select tblinvoice.BillingId, tblinvoice.PostingDate,  users.name
+$ret=mysqli_query($con,"select tblinvoice.BillingId, tblinvoice.PostingDate,  book.name
 FROM tblinvoice
 INNER JOIN users ON tblinvoice.Userid = users.id GROUP BY tblinvoice.PostingDate ORDER BY tblinvoice.PostingDate DESC;");
 $cnt=1;

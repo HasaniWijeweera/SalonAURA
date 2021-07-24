@@ -4,7 +4,7 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } else{ 
+  } else{
 
 
 
@@ -55,23 +55,19 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 			<div class="main-page">
 				<div class="tables">
 					<h3 class="title1">All Appointment</h3>
-					
-					
-				
+					<br>
+					<a href="new-appointment.php"><input type="submit" name="submit" value="New Appointments" class="btn btn-primary" ></a>	
+				    <a href="succ-appointment.php"><input type="submit" name="submit" value="Succeed Appointments" class="btn btn-primary" ></a>
+					<a href="reject-appointment.php"><input type="submit" name="submit" value="Rejected Apppointments" class="btn btn-primary" ></a>		
 					<div class="table-responsive bs-example widget-shadow">
 						<h4>All Appointment:</h4>
 						<table class="table table-bordered"> <thead> <tr> <th>#</th> 
 						<!-- <th> Appointment Number</th> -->
 						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$adid=$_SESSION['bpmsaid'];
-$ret=mysqli_query($con,"select Name from tblemployees where id='$adid'");
-$row=mysqli_fetch_array($ret);
-$name=$row['Name'];
-while ($row=mysqli_fetch_array($ret)) {
-$ret1=mysqli_query($con,"select *from  bookings where beautician='$name'");
+$ret=mysqli_query($con,"select *from  bookings where beautician='Dilini Randeniya' group by ApplyDate");
 $cnt=1;
-while ($row=mysqli_fetch_array($ret1)) {
+while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
@@ -87,7 +83,7 @@ while ($row=mysqli_fetch_array($ret1)) {
 						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>
 							 </td> </tr>   <?php 
 $cnt=$cnt+1;
-}}?></tbody> </table> 
+}?></tbody> </table> 
 					</div>
 				</div>
 			</div>

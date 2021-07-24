@@ -54,28 +54,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="forms">
-					<h3 class="title1">All invoices</h3>
-					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
-						<div class="form-title">
-							<h4>Select time period:</h4>
-						</div>
-						<div class="form-body">
-							<form method="post" name="bwdatesreport"  action="bwdates-reports-details.php" enctype="multipart/form-data">
-								<p style="font-size:16px; color:red" align="center"> <?php if($msg){
-    echo $msg;
-  }  ?> </p>
-
-  
-							 <div class="form-group"> <label for="exampleInputEmail1">From Date</label> <input type="date" class="form-control1" name="fromdate" id="fromdate" value="" required='true'> </div> 
-							 <div class="form-group"> <label for="exampleInputPassword1">To Date</label><input type="date" class="form-control1" name="todate" id="todate" value="" required='true'> </div>
-							 
-							
-							
-							  <button type="submit" name="submit" class="btn btn-default">Submit</button> </form> 
-						</div>
-						
-					</div>
 				
+				<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=4c9d87b1-42cd-4d45-b251-58b970630de5&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>	
 				
 			</div>
 		</div>

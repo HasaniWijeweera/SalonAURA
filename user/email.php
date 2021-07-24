@@ -12,7 +12,7 @@
                     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
                 }
                 $last_id = $_SESSION['lastid'];
-                echo "New record created successfully. Last inserted ID is: " . $last_id;
+              
                     use PHPMailer\PHPMailer\PHPMailer;
                     use PHPMailer\PHPMailer\Exception;
                     require 'vendor/autoload.php';
@@ -25,7 +25,7 @@
                         }
 
                     }
-                    debug_to_console($last_id);
+                    
                                  
                         $mail = new PHPMailer(true);
 
@@ -40,9 +40,15 @@
 
                         $mail->setFrom('salonaura.ragama@gmail.com','Salon AURA');
                         $mail->addAddress($to_id);
-                        $mail->Subject = 'Tour Confirmation with HarryTours';
-                        $mail->Body = '<h1>Thank You very much for selecting Harry Tours as your Tour planner in Sri Lanka</h1>';
+                        $mail->Subject = 'Successfully Created an Account';
+                        $mail->Body = 'Dear Customer,
 
+                        Thank You very much for selecting Salon AURA !!
+
+                        Salon AURA now avalible for online booking 
+                        log in and book any treatment you want.';
+
+                                           echo "<script>window.location.href = 'login.php'</script>";
                         if(!$mail->send()){
                             $error = "Mailer Error : ".$mail->ErrorInfo;
                             echo "<div class=display>'.$error.'</div>";

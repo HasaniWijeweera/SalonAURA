@@ -66,7 +66,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<!-- <th> Appointment Number</th> -->
 						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *from  bookings where Status='1' group by ApplyDate");
+$ret=mysqli_query($con,"select *from  bookings where beautician='Dilini Randeniya' and Status='1' group by ApplyDate");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
