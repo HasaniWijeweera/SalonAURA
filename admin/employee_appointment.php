@@ -55,7 +55,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 			<div class="main-page">
 			
 				<div class="forms"> 
-					<h3 class="title1">Update Supplier</h3>
+					<h3 class="title1">Employee Details</h3>
 
 					<br>
 			 	<a href="employee-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
