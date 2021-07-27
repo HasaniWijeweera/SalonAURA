@@ -75,12 +75,12 @@ echo "<script>window.location.href ='invoices.php'</script>";
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="tables">
-					<h3 class="title1">Assign Services</h3>
+					<h3 class="title1">Create Invoice </h3>
 					<br>
 					<a href="all-appointment.php"><input type="submit" name="submit" value="back" class="btn btn-primary" ></a>
 				
 					<div class="table-responsive bs-example widget-shadow">
-						<h4>Assign Services:</h4>
+						
 <form method="post">
 
 <table class="table table-bordered" width="100%" border="1"> 
@@ -129,7 +129,8 @@ $cnt=$cnt+1; } ?>
 
 
 <br><br><br><br>
-<h4>Assign Services:</h4><table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> <th>Action</th> </tr> </thead> <tbody>
+<h4>More treatments :</h4>
+<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> <th>Action</th> </tr> </thead> <tbody>
 <?php
 $ret=mysqli_query($con,"select *from  taskduration");
 $cnt=1;

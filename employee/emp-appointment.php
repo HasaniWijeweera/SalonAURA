@@ -40,6 +40,18 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <script src="js/metisMenu.min.js"></script>
 <script src="js/custom.js"></script>
 <link href="css/custom.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+
 <!--//Metis Menu -->
 </head> 
 <body class="cbp-spmenu-push">
@@ -55,7 +67,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 			<div class="main-page">
 			
 				<div class="forms"> 
-					<h3 class="title1">All Appointments</h3>
+					<h3 class="title1">Appointments Details</h3>
 
 					<br>
 			 	<a href="employee_appointment.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
@@ -63,8 +75,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">  
 							<?php
-$fdate=$_POST['fromdate'];
-$tdate=$_POST['todate'];
+
 
 ?>
   <?php
@@ -75,7 +86,7 @@ $ret=mysqli_query($con,"select * from  tblemployees where ID='$cid'");
 while ($row=mysqli_fetch_array($ret)) {
     $name= $row['Name'];
 ?> 
-							<h4>Employee Details:  <?php echo $row['Name'] ?></h4>
+							<h4><?php echo $row['Name'] ?></h4>
 						</div>
 						<div class="form-body">
 							<form method="post">
@@ -86,9 +97,15 @@ while ($row=mysqli_fetch_array($ret)) {
 
 
                             
-<table class="table table-bordered"> <thead> <tr> <th>#</th> 
+
+  <table  id="example" class="display" style="width:100%"> <thead> <tr> <th>No</th> 
 						<!-- <th> Appointment Number</th> -->
-						 <th>Customer Name</th><th>Service</th><th>Appointment Date</th><th>Appointment Time</th><th>Total Cost</th><th>Discount</th>   </tr> </thead> <tbody>
+						 <th>Customer Name</th>
+						 <th>Service</th>
+						 <th>Appointment Date</th>
+						 <th>Service Cost</th>
+						 <th>Discount Cost</th> 
+						 </tr> </thead> <tbody>
 <?php
 
 $ret2=mysqli_query($con," select bookings.name, bookings.Services,bookings.beautician,bookings.date, bookings.timeslot, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where
@@ -103,15 +120,13 @@ while ($row=mysqli_fetch_array($ret2)) {
 						 <td><?php  echo $row['name'];?></td>
 						 <td>
 						 <?php echo $row['Services'];?></td>
-						 <td>
-						 <?php echo $row['beautician'];?></td>
+						 
 						  <td><?php  echo $row['date'];?></td>
 
 						   <td><?php  echo $row['Cost'];?></td>
 
-						<?php   $gtotal=$row['Cost'] * 0.1;?>
 
-						   <td><?php  echo $gtotal;?></td>
+						   <td><?php   echo $gtotal=$row['Cost'] * 0.1;?></td>
 						    </tr>   <?php 
 							
 						
@@ -124,7 +139,7 @@ $cnt=$cnt+1;
 <tr>  
 <th colspan="2" style="text-align:center">Grand Total</th>
 <th></th>
-<th></th><th></th><th></th><th> <?php echo $total?></th>	
+<th></th><th></th><th> <?php echo $total?></th>	
 
 <?php $_SESSION['discount'] = $total;
 	$_SESSION['gid']=$total;
@@ -168,6 +183,18 @@ $cnt=$cnt+1;
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
    <script src="js/bootstrap.js"> </script>
+   <script>
+
+
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+           
+        ]
+    } );
+} );
+    </script>
 </body>
 </html>
 <?php } ?>

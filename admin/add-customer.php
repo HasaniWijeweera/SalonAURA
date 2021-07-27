@@ -18,8 +18,7 @@ $details=$_POST['details'];
      
     $query=mysqli_query($con, "insert into  users(name,email,contactno,password,age,Details) value('$name','$email','$mobilenum','$password','$age','$details')");
     if ($query) {
-echo "<script>alert('Customer has been added.');</script>"; 
-echo "<script>window.location.href = 'add-customer.php'</script>"; 
+$_SESSION['status']="New Customer Added";
  } else {
 echo "<script>alert('Something Went Wrong. Please try again.');</script>";  	
 } }
@@ -153,6 +152,19 @@ echo "<script>alert('Something Went Wrong. Please try again.');</script>";
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
    <script src="js/bootstrap.js"> </script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <?php 
+   if(isset($_SESSION['status'])&& $_SESSION['status'] !='')
+   { ?>
+   <script>
+	   swal({
+		   title:"<?php echo $_SESSION['status'];?>",
+		   icon:"success",
+		   button:"OK",
+	   });
+   </script>
+   <?php unset($_SESSION['status']);
+   }?>
 </body>
 </html>
 <?php } ?>

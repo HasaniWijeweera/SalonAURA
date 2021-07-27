@@ -31,10 +31,23 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <!--//webfonts--> 
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="js/wow.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+	<script src="js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+
+
 <!--//end-animate-->
 <!-- Metis Menu -->
 <script src="js/metisMenu.min.js"></script>
@@ -61,7 +74,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 					<div class="table-responsive bs-example widget-shadow">
 						<h4>Customer List:</h4> 
 						
-						<table class="table table-bordered"> <thead> <tr> <th>#</th> <th>Name</th> <th>Mobile</th> <th>Email</th>
+						<table  id="example" class="display" style="width:100%"><thead> <tr> <th>No:</th> <th>Name</th> <th>Mobile</th> <th>Email</th>
 						<th>Age</th> <th>Health Details</th> <th>Action</th> </tr> </thead> <tbody>
 <?php
 $ret=mysqli_query($con,"select * from  users order by regDate desc");
@@ -86,6 +99,16 @@ $cnt=$cnt+1;
 		
 	</div>
 	<!-- Classie -->
+	<script>
+		$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+          
+        ]
+    } );
+} );
+	</script>
 		<script src="js/classie.js"></script>
 		<script>
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
@@ -105,6 +128,7 @@ $cnt=$cnt+1;
 				}
 			}
 		</script>
+
 	<!--scrolling js-->
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
