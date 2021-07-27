@@ -142,7 +142,7 @@ if(isset($_POST['submit'])){
             $stringStart=$stringStart.":00".$startTimeStamp."-";
             $stringEnd=$stringEnd.":00".$endTimeStamp;
             $timeslot=$stringStart.$stringEnd;
-            $query=mysqli_query($con,"insert into bookings(name, timeslot, email, date,Services, beautician, PhoneNumber) value('$name', '$timeslot', '$email', '$date','$services','$beauty','$number')");
+            $query=mysqli_query($con,"insert into bookings(name, timeslot, email, date,Services, beautician, PhoneNumber) value('$name', '$timeslot', '$email', '$date','$services',' $beauty','$number')");
                            
             }
             $ret=mysqli_query($con,"select id from bookings where email='$email' and  PhoneNumber='$phone'");
