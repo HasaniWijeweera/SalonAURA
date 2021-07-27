@@ -19,7 +19,7 @@
         <div class="profile_details_left"><!--notifications of menu start -->
           <ul class="nofitications-dropdown">
             <?php
-$ret1=mysqli_query($con,"select ID,Name from  bookings where Status=''");
+$ret1=mysqli_query($con,"select ID,Name from  bookings where Status='' GROUP BY ApplyDate");
 $num=mysqli_num_rows($ret1);
 
 ?>  

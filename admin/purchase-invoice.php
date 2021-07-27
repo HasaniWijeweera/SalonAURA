@@ -65,7 +65,7 @@ while ($row=mysqli_fetch_array($ret)) {
 ?>				
 				
 					<div class="table-responsive bs-example widget-shadow">
-						<h4>Invoice #<?php echo $invid;?></h4>
+						<h4>Invoice #<?php echo $row['id']?></h4>
 						<table class="table table-bordered" width="100%" border="1"> 
 <tr>
 <th colspan="6">Supplier Details</th>	

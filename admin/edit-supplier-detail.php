@@ -89,7 +89,7 @@ if(isset($_POST['submit']))
 					<h3 class="title1">Update Supplier</h3>
 
 					<br>
-			 	<a href="employee-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
+			 	<a href="supplier-list.php"><input type="submit" name="submit" value="Back" class="btn btn-primary" ></a>
 			
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">

@@ -71,7 +71,7 @@ echo "<script>window.location.href ='invoices.php'</script>";
 				<div class="tables">
 					<h3 class="title1">Assign Services</h3>
 					<br>
-					<a href="all-appointment.php"><input type="submit" name="submit" value="back" class="btn btn-primary" ></a>
+					<a href="customer-list.php"><input type="submit" name="submit" value="back" class="btn btn-primary" ></a>
 				
 					<div class="table-responsive bs-example widget-shadow">
 						<h4>Assign Services:</h4>
