@@ -73,16 +73,18 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 					<div class="table-responsive bs-example widget-shadow">
 						<h4>Supplier Purchase:</h4> 
 						
-						<table  id="example" class="display" style="width:100%"> <thead> <tr> <th>No</th> <th>Supplier Name</th> <th>Product Name</th> <th>Producr Price</th>
+						<table  id="example" class="display" style="width:100%"> <thead> <tr> <th>No</th><th>Date</th> <th>Supplier Name</th> <th>Product Name</th> <th>Producr Price</th>
 						 <th>Quantity</th> <th>Total Price</th><th>Action</th> </tr> </thead> <tbody>
 <?php
-$ret=mysqli_query($con,"select *, (ProductPrice * OrderQuantity) as totalprice from  purchase");
+$ret=mysqli_query($con,"select *, (ProductPrice * OrderQuantity) as totalprice from  purchase ORDER BY Date DESC");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
 
-						 <tr> <th scope="row"><?php echo $cnt;?></th> <td><?php  echo $row['supplier_name'];?></td> <td><?php  echo $row['ProductName'];?></td> 
+						 <tr> <th scope="row"><?php echo $cnt;?></th>
+						 <td><?php  echo $row['Date'];?></td>
+						  <td><?php  echo $row['supplier_name'];?></td> <td><?php  echo $row['ProductName'];?></td> 
 						  <td><?php  echo $row['ProductPrice'];?></td>
 						  <td><?php  echo $row['OrderQuantity']?></td>
 						  <td><?php  echo $row['totalprice']?></td>

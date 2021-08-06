@@ -40,6 +40,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 <script src="js/metisMenu.min.js"></script>
 <script src="js/custom.js"></script>
 <link href="css/custom.css" rel="stylesheet">
+<script defer src="js/script.js"></script>
 <!--//Metis Menu -->
 </head> 
 <body class="cbp-spmenu-push">
@@ -53,7 +54,10 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<div class="main-page">
-				<div class="forms">
+			<button class="btn btn-primary" onclick="createPDF()">Download Report</button>
+				<div class="report" id="report1">
+
+		
 				
 				<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=b03c96a5-a765-496d-912a-d19f3a36968e&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
 				

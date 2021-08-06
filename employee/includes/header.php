@@ -25,7 +25,7 @@
             $row=mysqli_fetch_array($ret);
             $name=$row['name'];
 
-$ret1=mysqli_query($con,"select ID,Name from  bookings where  beautician='Dilini Randeniya' and Status=''");
+$ret1=mysqli_query($con,"select ID,Name from  bookings where  beautician=' Dilini Randeniya' and Status='' GROUP BY ApplyDate DESC");
 $num=mysqli_num_rows($ret1);
 
 ?>  
@@ -45,7 +45,7 @@ $num=mysqli_num_rows($ret1);
 while($result=mysqli_fetch_array($ret1))
 {
             ?>
-                 <a class="dropdown-item" href="view-appointment.php?viewid=<?php echo $result['ID'];?>"><p>New appointment received from <?php echo $result['Name'];?> </p></a><br />
+                 <a class="dropdown-item" href="new-appointment.php?viewid=<?php echo $result['ID'];?>"><p>New appointment received from <?php echo $result['Name'];?> </p></a><br />
 <?php }} else {?>
     <a class="dropdown-item" href="all-appointment.php">No New Appointment Received</a>
         <?php } ?>

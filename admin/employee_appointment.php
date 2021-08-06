@@ -115,8 +115,8 @@ while ($row=mysqli_fetch_array($ret2)) {
 						 <td>
 						 <?php echo $row['Services'];?></td>
 						 <td>
-						 <?php echo $row['beautician'];?></td>
-						  <td><?php  echo $row['date'];?></td>
+						 <?php echo $row['date'];?></td>
+						  <td><?php  echo $row['timeslot'];?></td>
 
 						   <td><?php  echo $row['Cost'];?></td>
 

@@ -75,7 +75,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						<h4><?php echo $row['Name']?></h4>
 						<table  id="example" class="display" style="width:100%"><thead> <tr> <th>#</th> 
 						<!-- <th> Appointment Number</th> -->
-						 <th>Name</th><th>Service</th> <th>Beautician</th> <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
+						 <th>Name</th><th>Service</th>  <th>Appointment Date</th><th>Appointment Time</th><th>Action</th> </tr> </thead> <tbody>
 <?php
 $ret=mysqli_query($con,"select *from  bookings where beautician='Dilini Randeniya' group by ApplyDate order by date DESC");
 $cnt=1;
@@ -88,8 +88,7 @@ while ($row=mysqli_fetch_array($ret)) {
 						 <td><?php  echo $row['name'];?></td>
 						 <td>
 						 <?php echo $row['Services'];?></td>
-						  <td><?php 
-						  echo $row['beautician'];?></td>
+						  
 						  <td><?php  echo $row['date'];?></td>
 						   <td><?php  echo $row['timeslot'];?></td>
 						    <td><button class="btn btn-primary"><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">View</a> </button>

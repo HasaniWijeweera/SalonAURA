@@ -110,7 +110,7 @@ while ($row=mysqli_fetch_array($ret)) {
 $bookingID = $_SESSION['bookid'];
 
 debug_to_console($bookid);
-$ret2=mysqli_query($con,"select bookings.Services, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='201' ");
+$ret2=mysqli_query($con,"select bookings.Services, taskduration.Cost from bookings INNER JOIN taskduration ON bookings.Services=taskduration.taskname where bookings.ID='219' ");
 $ret3=mysqli_query($con,"select taskduration.taskname,taskduration.Cost  
 	from  tblinvoice 
 	join taskduration on taskduration.ID=tblinvoice.ServiceId 

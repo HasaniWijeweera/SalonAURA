@@ -17,8 +17,7 @@ if(isset($_POST['submit']))
      
     $query=mysqli_query($con, "insert into  purchase (supplier_name,ProductName,ProductPrice,OrderQuantity) value('$sname','$pname','$pprice','$oquantity')");
     if ($query) {
-echo "<script>alert('Employee has been added.');</script>"; 
-echo "<script>window.location.href = 'supplier-purchase.php'</script>"; 
+		$_SESSION['status']="New Purchase Added";
  } else {
 echo "<script>alert('Something Went Wrong. Please try again.');</script>";  	
 } }
@@ -159,6 +158,19 @@ echo "<script>alert('Something Went Wrong. Please try again.');</script>";
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
    <script src="js/bootstrap.js"> </script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <?php 
+   if(isset($_SESSION['status'])&& $_SESSION['status'] !='')
+   { ?>
+   <script>
+	   swal({
+		   title:"<?php echo $_SESSION['status'];?>",
+		   icon:"success",
+		   button:"OK",
+	   });
+   </script>
+   <?php unset($_SESSION['status']);
+   }?>
 </body>
 </html>
 <?php } ?>
